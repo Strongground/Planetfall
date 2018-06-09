@@ -1,15 +1,17 @@
 extends Node2D
 
 # class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
+var background = null
+var camera = null
+var lander = null
 
 func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	pass
+	background = get_node("background")
+	camera = get_node("MoonLander/Camera2D")
+	lander = get_node("MoonLander")
+	# do some initializing
+	lander.set_rotation_degrees(90)
 
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+func _process(delta):
+	var new_pos = camera.get_camera_screen_center() - (background.get_position()/2)
+	background.set_position(new_pos)
