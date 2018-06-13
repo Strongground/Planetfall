@@ -6,10 +6,9 @@ var _smoke_trail = null
 var _once = false
 var _speed = 300
 var _i = 0
-var _j = 0
+var _colliders = null
 
 func _ready():
-	randomize()
 	_debris = get_node("Debris")
 	_smoke_trail = get_node("SmokeTrail")
 	var _random_sprite_positions = [0,18,36,54,72]
@@ -18,9 +17,10 @@ func _ready():
 
 func _integrate_forces(state):
 	_i = _speed * 10 / 300
-	_j = 10
 	if _once == false:
-		add_force(Vector2(0,0), Vector2(randi() % _speed - (_speed/2),_speed*-1))
+		randomize()
+		add_force(Vector2(0,0), Vector2(randi() % _speed * 3 - _speed * 3 / 2,_speed*-1))
+		print(randi() % _speed - (_speed/2))
 		_once = true
 	# Gradually cancel out y-axis forces
 	if get_applied_force().y < 0:
@@ -31,8 +31,12 @@ func _integrate_forces(state):
 	if get_applied_force().x < 0:
 		add_force(Vector2(0,0), Vector2(_i,0))
 	_i += _i
-	print(get_colliding_bodies())
 	
-#	if not get_colliding_bodies().empty():
-#		_smoke_trail.set_emitting(false)
-#		set_sleeping(true)
+	_colliders = get_colliding_bodies()
+	if not _colliders.empty():
+		var _collider = null
+		for _collider in _colliders:
+			if _collider.get_name() == "Level":
+				_smoke_trail.set_emitting(false)
+				set_contact_monitor(false)
+				set_max_contacts_reported(0)
