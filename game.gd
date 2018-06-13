@@ -12,7 +12,7 @@ func _ready():
 	camera_container = get_node("CameraContainer")
 	lander = get_node("MoonLander")
 	# do some initializing
-	lander.set_rotation_degrees(0)
+	lander.set_rotation_degrees(90)
 
 func _process(delta):
 	# camera position synced to lander

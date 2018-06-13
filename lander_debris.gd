@@ -20,7 +20,6 @@ func _integrate_forces(state):
 	if _once == false:
 		randomize()
 		add_force(Vector2(0,0), Vector2(randi() % _speed * 3 - _speed * 3 / 2,_speed*-1))
-		print(randi() % _speed - (_speed/2))
 		_once = true
 	# Gradually cancel out y-axis forces
 	if get_applied_force().y < 0:

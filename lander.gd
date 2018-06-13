@@ -5,9 +5,11 @@ export (int) var main_engine_thrust
 export (int) var rc_thrust
 export (float) var fuel_capacity
 export (float) var rc_fuel_capacity
+export (float) var damage_treshhold
 
 # class member variables go here, for example:
 var _game = null
+var _camera = null
 var _engine_particles = null
 var _rc_thruster_particles_right = null
 var _rc_thruster_particles_left = null
@@ -17,13 +19,13 @@ var fuel = 0.0
 var rc_fuel = 0.0
 var _rc_fuel_display = null
 var _fuel_display = null
-var _damage_treshhold = null
 var _explosion = null
 var _debris = null
 var alive = true
 
 func _ready():
 	_game = get_tree().get_current_scene()
+	_camera = _game.find_node("Camera2D")
 	_engine_particles = get_node("EngineParticles")
 	_rc_thruster_particles_right = get_node("RCThrusterParticles_Right")
 	_rc_thruster_particles_left = get_node("RCThrusterParticles_Left")
@@ -31,7 +33,6 @@ func _ready():
 	_fuel_display = _game.get_node("CameraContainer/Camera2D/Control/fuel")
 	_explosion = load("res://explosion.tscn")
 	_debris = load("res://lander_debris.tscn")
-	_damage_treshhold = 5.0
 	# sign main engine thrust negative
 	main_engine_thrust = main_engine_thrust * -1
 	# set initial fuel to capacity
@@ -93,9 +94,9 @@ func _integrate_forces(state):
 
 # On collision
 func _on_MoonLander_body_entered(body):
-#	print("Collision with: " + str(body))
-#	print("Collision speed: " + String(get_linear_velocity().x))
-	if abs(get_linear_velocity().x) >= _damage_treshhold or abs(get_linear_velocity().y) >= _damage_treshhold:
+	
+	print("Collision with force: " + str(get_linear_velocity()))
+	if abs(get_linear_velocity().x) >= damage_treshhold or abs(get_linear_velocity().y) >= damage_treshhold:
 		var _lander_explosion = _explosion.instance()
 		for i in range(0,3):
 			var _created_debris = _debris.instance()
@@ -103,6 +104,8 @@ func _on_MoonLander_body_entered(body):
 			_game.add_child(_created_debris)
 		_game.add_child(_lander_explosion)
 		_lander_explosion.set_position(get_position())
+		# duration, frequency, amplitude
+		_camera.shake(1, 50, 10)
 		self.alive = false
 		self.set_visible(false)
 		fuel = 0.0

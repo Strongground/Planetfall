@@ -1,25 +1,38 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://main_menu.gd" type="Script" id=1]
+[ext_resource path="res://menu_background.png" type="Texture" id=2]
 
-[node name="MainMenu" type="Control"]
+[node name="Menus" type="Node2D"]
+
+script = ExtResource( 1 )
+_sections_unfolded = [ "Rect", "Size Flags", "Transform" ]
+
+[node name="menu_background" type="Sprite" parent="." index="0"]
+
+position = Vector2( -30, 0 )
+scale = Vector2( 5.51709, 5.51709 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset", "Region", "Transform" ]
+
+[node name="MainMenu" type="Control" parent="." index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 1024.0
+margin_bottom = 600.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 1 )
-_sections_unfolded = [ "Rect", "Size Flags" ]
+_sections_unfolded = [ "Rect" ]
 
-[node name="HBoxContainer" type="CenterContainer" parent="." index="0"]
+[node name="CenterContainer" type="CenterContainer" parent="MainMenu" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -36,7 +49,7 @@ size_flags_vertical = 1
 use_top_left = false
 _sections_unfolded = [ "Grow Direction", "Margin", "Rect" ]
 
-[node name="CenterContainer" type="VBoxContainer" parent="HBoxContainer" index="0"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/CenterContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -55,7 +68,7 @@ size_flags_vertical = 1
 alignment = 0
 _sections_unfolded = [ "Rect" ]
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/CenterContainer" index="0"]
+[node name="MarginContainer" type="MarginContainer" parent="MainMenu/CenterContainer/VBoxContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -70,7 +83,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 
-[node name="NewGame" type="Button" parent="HBoxContainer/CenterContainer/MarginContainer" index="0"]
+[node name="NewGame" type="Button" parent="MainMenu/CenterContainer/VBoxContainer/MarginContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -94,7 +107,7 @@ text = "New Game"
 flat = false
 align = 1
 
-[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/CenterContainer" index="1"]
+[node name="MarginContainer2" type="MarginContainer" parent="MainMenu/CenterContainer/VBoxContainer" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -110,7 +123,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 
-[node name="Exit" type="Button" parent="HBoxContainer/CenterContainer/MarginContainer2" index="0"]
+[node name="Exit" type="Button" parent="MainMenu/CenterContainer/VBoxContainer/MarginContainer2" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -134,8 +147,165 @@ text = "Exit"
 flat = false
 align = 1
 
-[connection signal="pressed" from="HBoxContainer/CenterContainer/MarginContainer/NewGame" to="." method="_on_NewGame_pressed"]
+[node name="LevelSelection" type="Control" parent="." index="2"]
 
-[connection signal="pressed" from="HBoxContainer/CenterContainer/MarginContainer2/Exit" to="." method="_on_Exit_pressed"]
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 1024.0
+margin_bottom = 600.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelSelection" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 236.0
+margin_top = 211.0
+margin_right = 785.0
+margin_bottom = 431.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 4
+size_flags_vertical = 1
+alignment = 0
+_sections_unfolded = [ "Size Flags" ]
+
+[node name="TestLevel" type="Button" parent="LevelSelection/VBoxContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 549.0
+margin_bottom = 20.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Test_Level"
+flat = false
+align = 1
+
+[node name="Challenges" type="Button" parent="LevelSelection/VBoxContainer" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 24.0
+margin_right = 549.0
+margin_bottom = 44.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+disabled = true
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Level 1"
+flat = false
+align = 1
+
+[node name="OpenWorld" type="Button" parent="LevelSelection/VBoxContainer" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 48.0
+margin_right = 549.0
+margin_bottom = 68.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+disabled = true
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Open World Gameplay"
+flat = false
+align = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="LevelSelection" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 462.0
+margin_top = 411.0
+margin_right = 560.0
+margin_bottom = 431.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 4
+size_flags_vertical = 1
+alignment = 0
+_sections_unfolded = [ "Size Flags" ]
+
+[node name="Back" type="Button" parent="LevelSelection/VBoxContainer2" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 98.0
+margin_bottom = 20.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Back"
+flat = false
+align = 1
+_sections_unfolded = [ "Rect" ]
+
+[connection signal="pressed" from="MainMenu/CenterContainer/VBoxContainer/MarginContainer/NewGame" to="." method="_on_NewGame_pressed"]
+
+[connection signal="pressed" from="MainMenu/CenterContainer/VBoxContainer/MarginContainer2/Exit" to="." method="_on_Exit_pressed"]
+
+[connection signal="pressed" from="LevelSelection/VBoxContainer/TestLevel" to="." method="_on_TestLevel_pressed"]
+
+[connection signal="pressed" from="LevelSelection/VBoxContainer2/Back" to="." method="_on_Back_pressed"]
 
 
