@@ -19,6 +19,7 @@ var _rc_fuel_display = null
 var _fuel_display = null
 var _damage_treshhold = null
 var _explosion = null
+var _debris = null
 var alive = true
 
 func _ready():
@@ -29,6 +30,7 @@ func _ready():
 	_rc_fuel_display = _game.get_node("CameraContainer/Camera2D/Control/rc_fuel")
 	_fuel_display = _game.get_node("CameraContainer/Camera2D/Control/fuel")
 	_explosion = load("res://explosion.tscn")
+	_debris = load("res://lander_debris.tscn")
 	_damage_treshhold = 5.0
 	# sign main engine thrust negative
 	main_engine_thrust = main_engine_thrust * -1
@@ -91,8 +93,14 @@ func _integrate_forces(state):
 
 # On collision
 func _on_MoonLander_body_entered(body):
-	if abs(get_linear_velocity().x) >= _damage_treshhold and abs(get_linear_velocity().y) >= _damage_treshhold:
+#	print("Collision with: " + str(body))
+#	print("Collision speed: " + String(get_linear_velocity().x))
+	if abs(get_linear_velocity().x) >= _damage_treshhold or abs(get_linear_velocity().y) >= _damage_treshhold:
 		var _lander_explosion = _explosion.instance()
+		for i in range(0,3):
+			var _created_debris = _debris.instance()
+			_created_debris.set_position(get_position())
+			_game.add_child(_created_debris)
 		_game.add_child(_lander_explosion)
 		_lander_explosion.set_position(get_position())
 		self.alive = false

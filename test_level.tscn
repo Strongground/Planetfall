@@ -208,7 +208,7 @@ _sections_unfolded = [ "Offset", "Region" ]
 
 [node name="MoonLander" type="RigidBody2D" parent="." index="3"]
 
-position = Vector2( 20.6569, -134.71 )
+position = Vector2( -102.083, -58.8998 )
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
@@ -216,7 +216,7 @@ mode = 0
 mass = 1.0
 friction = 1.0
 bounce = 0.0
-gravity_scale = 0.4
+gravity_scale = 1.0
 custom_integrator = false
 continuous_cd = 0
 contacts_reported = 1
