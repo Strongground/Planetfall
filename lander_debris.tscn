@@ -48,7 +48,7 @@ _sections_unfolded = [ "Animation", "Resource" ]
 custom_solver_bias = 0.0
 radius = 5.15103
 
-[node name="Debris" type="RigidBody2D"]
+[node name="Debris" type="RigidBody2D" index="0"]
 
 position = Vector2( 74.7492, 66.0027 )
 rotation = -3.14159
@@ -62,8 +62,8 @@ bounce = 0.0
 gravity_scale = 1.0
 custom_integrator = false
 continuous_cd = 0
-contacts_reported = 0
-contact_monitor = false
+contacts_reported = 1
+contact_monitor = true
 sleeping = false
 can_sleep = true
 linear_velocity = Vector2( 0, 0 )
@@ -105,9 +105,5 @@ _sections_unfolded = [ "Region" ]
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
 
 shape = SubResource( 2 )
-
-[connection signal="body_entered" from="." to="." method="_on_Debris_body_entered" flags=6]
-
-[connection signal="sleeping_state_changed" from="." to="." method="_on_Debris_sleeping_state_changed" flags=6]
 
 

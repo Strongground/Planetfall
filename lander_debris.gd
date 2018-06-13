@@ -31,8 +31,8 @@ func _integrate_forces(state):
 	if get_applied_force().x < 0:
 		add_force(Vector2(0,0), Vector2(_i,0))
 	_i += _i
-	print(str(abs(get_applied_force().x)) + ", " + str(abs(get_applied_force().y)))
-
-func _on_Debris_body_entered(body):
-	_smoke_trail.set_emitting(false)
-	set_sleeping(true)
+	print(get_colliding_bodies())
+	
+#	if not get_colliding_bodies().empty():
+#		_smoke_trail.set_emitting(false)
+#		set_sleeping(true)
