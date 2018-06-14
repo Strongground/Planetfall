@@ -1,19 +1,16 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://game.gd" type="Script" id=1]
 [ext_resource path="res://background.png" type="Texture" id=2]
 [ext_resource path="res://level.png" type="Texture" id=3]
-[ext_resource path="res://Camera2D.gd" type="Script" id=4]
-[ext_resource path="res://fuel_tank.png" type="Texture" id=5]
-[ext_resource path="res://fuel.png" type="Texture" id=6]
-[ext_resource path="res://rc_fuel_tank.png" type="Texture" id=7]
-[ext_resource path="res://rc_fuel.png" type="Texture" id=8]
-[ext_resource path="res://lander.gd" type="Script" id=9]
-[ext_resource path="res://eagle.png" type="Texture" id=10]
-[ext_resource path="res://smoke_white.png" type="Texture" id=11]
-[ext_resource path="res://rc_thruster_particles.tres" type="Material" id=12]
-[ext_resource path="res://inputMgr.gd" type="Script" id=13]
-[ext_resource path="res://landing_target.tscn" type="PackedScene" id=14]
+[ext_resource path="res://gui.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Camera2D.gd" type="Script" id=5]
+[ext_resource path="res://lander.gd" type="Script" id=6]
+[ext_resource path="res://eagle.png" type="Texture" id=7]
+[ext_resource path="res://smoke_white.png" type="Texture" id=8]
+[ext_resource path="res://rc_thruster_particles.tres" type="Material" id=9]
+[ext_resource path="res://inputMgr.gd" type="Script" id=10]
+[ext_resource path="res://landing_target.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Gradient" id=1]
 
@@ -155,7 +152,14 @@ position = Vector2( 21.3203, -134.373 )
 z_index = 999
 _sections_unfolded = [ "Transform", "Z Index" ]
 
-[node name="Camera2D" type="Camera2D" parent="CameraContainer" index="0"]
+[node name="GUI" parent="CameraContainer" index="0" instance=ExtResource( 4 )]
+
+position = Vector2( -254.147, -145.794 )
+scale = Vector2( 0.5, 0.5 )
+main_fuel_warning_treshold = 0.35
+rc_fuel_warning_treshold = 0.35
+
+[node name="Camera2D" type="Camera2D" parent="CameraContainer" index="1"]
 
 anchor_mode = 1
 rotating = false
@@ -168,7 +172,7 @@ limit_bottom = 10000000
 limit_smoothed = false
 drag_margin_h_enabled = false
 drag_margin_v_enabled = false
-smoothing_enabled = false
+smoothing_enabled = true
 smoothing_speed = 5.0
 offset_v = 0.0
 offset_h = 0.0
@@ -179,59 +183,12 @@ drag_margin_bottom = 0.2
 editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
-script = ExtResource( 4 )
-
-[node name="Control" type="Control" parent="CameraContainer/Camera2D" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = -255.0
-margin_top = -149.0
-margin_right = 257.0
-margin_bottom = 151.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-
-[node name="fuel_tank" type="Sprite" parent="CameraContainer/Camera2D/Control" index="0"]
-
-position = Vector2( 31.7455, 54.5805 )
-texture = ExtResource( 5 )
-
-[node name="fuel" type="Sprite" parent="CameraContainer/Camera2D/Control" index="1"]
-
-position = Vector2( 48.8074, 87.3012 )
-rotation = -3.14159
-texture = ExtResource( 6 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 0, 0, 32, 65 )
-_sections_unfolded = [ "Offset", "Region", "Transform" ]
-
-[node name="rc_fuel_tank" type="Sprite" parent="CameraContainer/Camera2D/Control" index="2"]
-
-position = Vector2( 92.5019, 53.8643 )
-texture = ExtResource( 7 )
-
-[node name="rc_fuel" type="Sprite" parent="CameraContainer/Camera2D/Control" index="3"]
-
-position = Vector2( 105.486, 77.6297 )
-rotation = 3.14159
-scale = Vector2( 0.987764, 1.00884 )
-texture = ExtResource( 8 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 0, 0, 28, 54 )
-_sections_unfolded = [ "Offset", "Region" ]
+script = ExtResource( 5 )
+_sections_unfolded = [ "Smoothing" ]
 
 [node name="MoonLander" type="RigidBody2D" parent="." index="3"]
 
-position = Vector2( 82.9482, -187.617 )
+position = Vector2( 80.5384, -141.028 )
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
@@ -250,7 +207,7 @@ linear_velocity = Vector2( 0, 0 )
 linear_damp = -1.0
 angular_velocity = 0.0
 angular_damp = -1.0
-script = ExtResource( 9 )
+script = ExtResource( 6 )
 _sections_unfolded = [ "Transform", "collision" ]
 __meta__ = {
 "_edit_group_": true
@@ -270,7 +227,7 @@ polygon = PoolVector2Array( -17.1793, 13.1874, -14.7068, 13.1874, -10.1029, 1.76
 [node name="eagle" type="Sprite" parent="MoonLander" index="1"]
 
 rotation = -1.57079
-texture = ExtResource( 10 )
+texture = ExtResource( 7 )
 
 [node name="EngineParticles" type="Particles2D" parent="MoonLander" index="2"]
 
@@ -289,7 +246,7 @@ visibility_rect = Rect2( -100, -100, 200, 200 )
 local_coords = false
 draw_order = 0
 process_material = SubResource( 5 )
-texture = ExtResource( 11 )
+texture = ExtResource( 8 )
 normal_map = null
 h_frames = 8
 v_frames = 1
@@ -312,8 +269,8 @@ fract_delta = true
 visibility_rect = Rect2( -100, -100, 200, 200 )
 local_coords = false
 draw_order = 0
-process_material = ExtResource( 12 )
-texture = ExtResource( 11 )
+process_material = ExtResource( 9 )
+texture = ExtResource( 8 )
 normal_map = null
 h_frames = 8
 v_frames = 1
@@ -336,8 +293,8 @@ fract_delta = true
 visibility_rect = Rect2( -100, -100, 200, 200 )
 local_coords = false
 draw_order = 0
-process_material = ExtResource( 12 )
-texture = ExtResource( 11 )
+process_material = ExtResource( 9 )
+texture = ExtResource( 8 )
 normal_map = null
 h_frames = 8
 v_frames = 1
@@ -345,11 +302,11 @@ _sections_unfolded = [ "Drawing", "Process Material", "Textures", "Time" ]
 
 [node name="InputManager" type="Node2D" parent="." index="4"]
 
-script = ExtResource( 13 )
+script = ExtResource( 10 )
 
-[node name="LandingTarget" parent="." index="5" instance=ExtResource( 14 )]
+[node name="LandingTarget" parent="." index="5" instance=ExtResource( 11 )]
 
-position = Vector2( 238, 44 )
+position = Vector2( 238, 45 )
 
 [connection signal="body_entered" from="MoonLander" to="MoonLander" method="_on_MoonLander_body_entered"]
 

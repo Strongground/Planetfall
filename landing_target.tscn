@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 10, 7.79523 )
+extents = Vector2( 4.41723, 0.823472 )
 
 [node name="LandingTarget" type="Node2D"]
 
@@ -29,7 +29,7 @@ audio_bus_name = "Master"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TargetArea" index="0"]
 
-position = Vector2( -0.624634, -4.37854 )
+position = Vector2( -0.624634, 9.62146 )
 scale = Vector2( 3.18383, 3.18383 )
 shape = SubResource( 1 )
 

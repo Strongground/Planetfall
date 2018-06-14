@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://main_menu.gd" type="Script" id=1]
 [ext_resource path="res://menu_background.png" type="Texture" id=2]
+[ext_resource path="res://space_theme_ui/metalPanel.png" type="Texture" id=3]
+[ext_resource path="res://space_theme_ui/squareWhite.png" type="Texture" id=4]
 
-[node name="Menus" type="Node2D"]
+[node name="Menus" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Rect", "Size Flags", "Transform" ]
@@ -32,7 +34,30 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Rect" ]
 
-[node name="CenterContainer" type="CenterContainer" parent="MainMenu" index="0"]
+[node name="NinePatchRect" type="NinePatchRect" parent="MainMenu" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 409.0
+margin_top = 233.0
+margin_right = 632.0
+margin_bottom = 356.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 3 )
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+_sections_unfolded = [ "Patch Margin" ]
+
+[node name="CenterContainer" type="CenterContainer" parent="MainMenu" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -82,8 +107,32 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+_sections_unfolded = [ "Margin" ]
 
-[node name="NewGame" type="Button" parent="MainMenu/CenterContainer/VBoxContainer/MarginContainer" index="0"]
+[node name="NinePatchRect" type="NinePatchRect" parent="MainMenu/CenterContainer/VBoxContainer/MarginContainer" index="0"]
+
+self_modulate = Color( 0.585938, 0.585938, 0.585938, 1 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 8.0
+margin_right = 90.0
+margin_bottom = 20.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 4 )
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+_sections_unfolded = [ "Axis Stretch", "Grow Direction", "Margin", "Patch Margin", "Size Flags", "Visibility" ]
+
+[node name="NewGame" type="Button" parent="MainMenu/CenterContainer/VBoxContainer/MarginContainer" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -97,15 +146,16 @@ rect_clip_content = false
 focus_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
+size_flags_horizontal = 2
+size_flags_vertical = 2
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
 text = "New Game"
-flat = false
+flat = true
 align = 1
+_sections_unfolded = [ "Size Flags", "Textures", "Visibility" ]
 
 [node name="MarginContainer2" type="MarginContainer" parent="MainMenu/CenterContainer/VBoxContainer" index="1"]
 
@@ -123,7 +173,30 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 
-[node name="Exit" type="Button" parent="MainMenu/CenterContainer/VBoxContainer/MarginContainer2" index="0"]
+[node name="NinePatchRect2" type="NinePatchRect" parent="MainMenu/CenterContainer/VBoxContainer/MarginContainer2" index="0"]
+
+self_modulate = Color( 0.585938, 0.585938, 0.585938, 1 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 8.0
+margin_right = 90.0
+margin_bottom = 20.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 4 )
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+_sections_unfolded = [ "Patch Margin", "Visibility" ]
+
+[node name="Exit" type="Button" parent="MainMenu/CenterContainer/VBoxContainer/MarginContainer2" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -144,7 +217,7 @@ enabled_focus_mode = 2
 shortcut = null
 group = null
 text = "Exit"
-flat = false
+flat = true
 align = 1
 
 [node name="LevelSelection" type="Control" parent="." index="2"]

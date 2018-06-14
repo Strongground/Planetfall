@@ -1,0 +1,56 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://warn_blink.gd" type="Script" id=1]
+[ext_resource path="res://space_theme_ui/dot_shadow.png" type="Texture" id=2]
+[ext_resource path="res://space_theme_ui/dotWhite.png" type="Texture" id=3]
+
+[node name="WarnBlinker" type="MarginContainer"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 67.0
+margin_top = 57.0
+margin_right = 93.0
+margin_bottom = 83.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+script = ExtResource( 1 )
+_sections_unfolded = [ "Rect" ]
+
+[node name="Shadow" type="Sprite" parent="." index="0"]
+
+position = Vector2( 13, 18 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Warning_Dot" type="Sprite" parent="." index="1"]
+
+position = Vector2( 13, 13 )
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="Aura" type="Sprite" parent="." index="2"]
+
+visible = false
+scale = Vector2( 2.2063, 2.2063 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Tween" type="Tween" parent="." index="3"]
+
+repeat = false
+playback_process_mode = 1
+playback_speed = 1.0
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
+
+[connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
+
+

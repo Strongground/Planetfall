@@ -1,0 +1,215 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://gui.gd" type="Script" id=1]
+[ext_resource path="res://space_theme_ui/metalPanel.png" type="Texture" id=2]
+[ext_resource path="res://space_theme_ui/metalPanel_plate.png" type="Texture" id=3]
+[ext_resource path="res://fonts/kenvector_future.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://warn_blink.tscn" type="PackedScene" id=5]
+[ext_resource path="res://fuel_tank.png" type="Texture" id=6]
+[ext_resource path="res://fuel.png" type="Texture" id=7]
+[ext_resource path="res://rc_fuel_tank.png" type="Texture" id=8]
+[ext_resource path="res://rc_fuel.png" type="Texture" id=9]
+[ext_resource path="res://winner_overlay.png" type="Texture" id=10]
+
+[sub_resource type="DynamicFont" id=1]
+
+size = 14
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 4 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[node name="GUI" type="Node2D"]
+
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+main_fuel_warning_treshold = 0.2
+rc_fuel_warning_treshold = 0.15
+
+[node name="Control" type="Control" parent="." index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 1024.0
+margin_bottom = 600.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Fuel" type="NinePatchRect" parent="Control" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 9.0
+margin_top = 9.0
+margin_right = 268.0
+margin_bottom = 205.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 2 )
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+_sections_unfolded = [ "Axis Stretch", "Patch Margin" ]
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Control/Fuel" index="0"]
+
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 71.0
+margin_top = 14.0
+margin_right = 247.0
+margin_bottom = 41.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 3 )
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+_sections_unfolded = [ "Patch Margin" ]
+
+[node name="Label" type="Label" parent="Control/Fuel/NinePatchRect" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 7.0
+margin_top = 5.0
+margin_right = 172.0
+margin_bottom = 22.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 1 )
+text = "Main Engine Fuel"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_fonts" ]
+
+[node name="Main_Fuel_Warning" parent="Control/Fuel" index="1" instance=ExtResource( 5 )]
+
+margin_left = 144.0
+margin_top = 50.0
+margin_right = 169.0
+margin_bottom = 75.0
+
+[node name="RC_Fuel_Warning" parent="Control/Fuel" index="2" instance=ExtResource( 5 )]
+
+margin_left = 144.0
+margin_top = 157.0
+margin_right = 169.0
+margin_bottom = 182.0
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="Control/Fuel" index="3"]
+
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 71.0
+margin_top = 101.0
+margin_right = 247.0
+margin_bottom = 148.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 3 )
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+_sections_unfolded = [ "Patch Margin" ]
+
+[node name="Label2" type="Label" parent="Control/Fuel/NinePatchRect2" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 7.0
+margin_top = 5.0
+margin_right = 183.0
+margin_bottom = 42.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 1 )
+text = "RC Thruster fuel"
+autowrap = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_fonts" ]
+
+[node name="fuel_tank" type="Sprite" parent="Control/Fuel" index="4"]
+
+position = Vector2( 36.7455, 51.5805 )
+texture = ExtResource( 6 )
+
+[node name="fuel" type="Sprite" parent="Control/Fuel" index="5"]
+
+position = Vector2( 53.8074, 84.3012 )
+rotation = -3.14159
+texture = ExtResource( 7 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 65 )
+_sections_unfolded = [ "Offset", "Region", "Transform" ]
+
+[node name="rc_fuel_tank" type="Sprite" parent="Control/Fuel" index="6"]
+
+position = Vector2( 37.5019, 140.864 )
+texture = ExtResource( 8 )
+
+[node name="rc_fuel" type="Sprite" parent="Control/Fuel" index="7"]
+
+position = Vector2( 50.486, 164.63 )
+rotation = 3.14159
+scale = Vector2( 0.987764, 1.00884 )
+texture = ExtResource( 9 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 28, 54 )
+_sections_unfolded = [ "Offset", "Region" ]
+
+[node name="Winner" type="Sprite" parent="Control" index="1"]
+
+visible = false
+position = Vector2( 507.579, 272.349 )
+scale = Vector2( 3.97904, 3.97904 )
+texture = ExtResource( 10 )
+
+
