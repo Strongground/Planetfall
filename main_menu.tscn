@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://main_menu.gd" type="Script" id=1]
 [ext_resource path="res://menu_background.png" type="Texture" id=2]
 [ext_resource path="res://space_theme_ui/metalPanel.png" type="Texture" id=3]
-[ext_resource path="res://space_theme_ui/squareWhite.png" type="Texture" id=4]
+[ext_resource path="res://space_theme_ui/planetfall_button_hover.tres" type="StyleBox" id=4]
+[ext_resource path="res://space_theme_ui/planetfall_button_pressed.tres" type="StyleBox" id=5]
+[ext_resource path="res://space_theme_ui/planetfall_button.tres" type="StyleBox" id=6]
+[ext_resource path="res://fonts/font_kenvector.tres" type="DynamicFont" id=7]
 
-[node name="Menus" type="Node2D" index="0"]
+[node name="Menus" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Rect", "Size Flags", "Transform" ]
@@ -80,10 +83,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 467.0
-margin_top = 278.0
-margin_right = 557.0
-margin_bottom = 322.0
+margin_left = 456.0
+margin_top = 271.0
+margin_right = 568.0
+margin_bottom = 329.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -99,8 +102,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 90.0
-margin_bottom = 20.0
+margin_right = 112.0
+margin_bottom = 27.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -109,53 +112,34 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Margin" ]
 
-[node name="NinePatchRect" type="NinePatchRect" parent="MainMenu/CenterContainer/VBoxContainer/MarginContainer" index="0"]
-
-self_modulate = Color( 0.585938, 0.585938, 0.585938, 1 )
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 8.0
-margin_right = 90.0
-margin_bottom = 20.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-texture = ExtResource( 4 )
-patch_margin_left = 10
-patch_margin_top = 10
-patch_margin_right = 10
-patch_margin_bottom = 10
-_sections_unfolded = [ "Axis Stretch", "Grow Direction", "Margin", "Patch Margin", "Size Flags", "Visibility" ]
-
-[node name="NewGame" type="Button" parent="MainMenu/CenterContainer/VBoxContainer/MarginContainer" index="1"]
+[node name="NewGame" type="Button" parent="MainMenu/CenterContainer/VBoxContainer/MarginContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 8.0
-margin_right = 90.0
-margin_bottom = 20.0
+margin_right = 112.0
+margin_bottom = 27.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 0
-size_flags_horizontal = 2
-size_flags_vertical = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/normal = ExtResource( 6 )
+custom_fonts/font = ExtResource( 7 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-text = "New Game"
-flat = true
+text = "new game"
+flat = false
 align = 1
-_sections_unfolded = [ "Size Flags", "Textures", "Visibility" ]
+_sections_unfolded = [ "Anchor", "Margin", "Size Flags", "custom_fonts", "custom_styles" ]
 
 [node name="MarginContainer2" type="MarginContainer" parent="MainMenu/CenterContainer/VBoxContainer" index="1"]
 
@@ -163,9 +147,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 24.0
-margin_right = 90.0
-margin_bottom = 44.0
+margin_top = 31.0
+margin_right = 112.0
+margin_bottom = 58.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -173,38 +157,15 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 
-[node name="NinePatchRect2" type="NinePatchRect" parent="MainMenu/CenterContainer/VBoxContainer/MarginContainer2" index="0"]
-
-self_modulate = Color( 0.585938, 0.585938, 0.585938, 1 )
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 8.0
-margin_right = 90.0
-margin_bottom = 20.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-texture = ExtResource( 4 )
-patch_margin_left = 10
-patch_margin_top = 10
-patch_margin_right = 10
-patch_margin_bottom = 10
-_sections_unfolded = [ "Patch Margin", "Visibility" ]
-
-[node name="Exit" type="Button" parent="MainMenu/CenterContainer/VBoxContainer/MarginContainer2" index="1"]
+[node name="Exit" type="Button" parent="MainMenu/CenterContainer/VBoxContainer/MarginContainer2" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 8.0
-margin_right = 90.0
-margin_bottom = 20.0
+margin_right = 112.0
+margin_bottom = 27.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -212,13 +173,18 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/normal = ExtResource( 6 )
+custom_fonts/font = ExtResource( 7 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-text = "Exit"
-flat = true
+text = "exit"
+flat = false
 align = 1
+_sections_unfolded = [ "Anchor", "Margin", "Size Flags", "custom_fonts", "custom_styles" ]
 
 [node name="LevelSelection" type="Control" parent="." index="2"]
 

@@ -75,7 +75,7 @@ func _integrate_forces(state):
 		_rc_thruster_particles_left.set_emitting(false)
 	
 	# print(str(abs(get_linear_velocity().x)) + ", " + str(abs(get_linear_velocity().y)))
-	print("Has landed: " + str(landed) + ", has landed for: " + str(_has_landed_for))
+	# print("Has landed: " + str(landed) + ", has landed for: " + str(_has_landed_for))
 	if abs(get_linear_velocity().x) < 0.25 and abs(get_linear_velocity().y) < 0.25:
 		if _has_landed_for <= 100:
 			_has_landed_for += 1

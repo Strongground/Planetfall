@@ -22,22 +22,6 @@ func blink(color=Color(1,0,0,1), speed=1.0):
 	_gcolor = color
 	_gspeed = speed
 	_gcurrent = _warning_light.get_modulate()
-	_start_tween()
-	
-func _start_tween():
-	_tween.interpolate_property(_warning_light, "modulate", 
-    _gcurrent, _gcolor, _gspeed, 
-    Tween.TRANS_LINEAR, Tween.EASE_IN)
+	_tween.interpolate_property(_warning_light, "modulate", _gcurrent, _gcolor, _gspeed, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	_tween.set_repeat(true)
 	_tween.start()
-	
-func _stop_tween():
-	_tween.interpolate_property(_warning_light, "modulate", 
-    _gcolor, _gcurrent, _gspeed, 
-    Tween.TRANS_LINEAR, Tween.EASE_IN)
-	_start_tween()
-
-func _on_Tween_tween_completed(object, key):
-	_tween.interpolate_property(_warning_light, "modulate", 
-    _gcolor, _gcurrent, _gspeed, 
-    Tween.TRANS_LINEAR, Tween.EASE_IN)
-	_stop_tween()
