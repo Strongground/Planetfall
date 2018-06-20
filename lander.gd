@@ -13,15 +13,20 @@ onready var _camera = _game.find_node("Camera2D")
 onready var _engine_particles = get_node("EngineParticles")
 onready var _rc_thruster_particles_right = get_node("RCThrusterParticles_Right")
 onready var _rc_thruster_particles_left = get_node("RCThrusterParticles_Left")
+onready var _raycast = get_node("RayCast2D")
 onready var _explosion = load("res://explosion.tscn")
 onready var _debris = load("res://lander_debris.tscn")
+onready var _marker1 = _game.find_node("Marker")
+# init
 var _rotation_dir = 0
 var _has_landed_for = 0
+var _terrain_collision = Vector2(0,0)
 var thrust = Vector2()
 var fuel = 0.0
 var rc_fuel = 0.0
 var alive = true
 var landed = false
+var height_over_terrain = 0.0
 
 func _ready():
 	# sign main engine thrust negative
@@ -38,6 +43,11 @@ func _process(delta):
 		_rc_thruster_particles_left.set_emitting(false)
 		_rc_thruster_particles_right.set_emitting(false)
 		_rotation_dir = 0
+	# Calculate height over terrain
+	#_raycast.set_cast_to(to_local(Vector2(0, 50)))
+	_terrain_collision = _raycast.get_collision_point()
+	_marker1.set_position(_terrain_collision)
+	height_over_terrain = _terrain_collision.distance_to(self.get_global_transform().get_origin())
 
 func _integrate_forces(state):
 	if fuel <= 0:
@@ -114,3 +124,4 @@ func _on_MoonLander_body_entered(body):
 			self.set_visible(false)
 			fuel = 0.0
 			rc_fuel = 0.0
+			height_over_terrain = 0.0

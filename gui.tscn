@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://gui.gd" type="Script" id=1]
 [ext_resource path="res://space_theme_ui/metalPanel.png" type="Texture" id=2]
@@ -12,9 +12,19 @@
 [ext_resource path="res://fuel.png" type="Texture" id=10]
 [ext_resource path="res://rc_fuel_tank.png" type="Texture" id=11]
 [ext_resource path="res://rc_fuel.png" type="Texture" id=12]
-[ext_resource path="res://winner_overlay.png" type="Texture" id=13]
+[ext_resource path="res://space_theme_ui/glassPanel_corners.png" type="Texture" id=13]
+[ext_resource path="res://fonts/kenvector_future.ttf" type="DynamicFontData" id=14]
+[ext_resource path="res://winner_overlay.png" type="Texture" id=15]
 
-[node name="GUI" type="Node2D" index="0"]
+[sub_resource type="DynamicFont" id=1]
+
+size = 30
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 14 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[node name="GUI" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -37,16 +47,18 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Rect" ]
 
-[node name="Panel" type="NinePatchRect" parent="Control" index="0"]
+[node name="Fuel Panel" type="NinePatchRect" parent="Control" index="0"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 9.0
-margin_top = 9.0
-margin_right = 354.0
-margin_bottom = 205.0
+margin_left = 15.0
+margin_top = 14.0
+margin_right = 360.0
+margin_bottom = 210.0
+rect_scale = Vector2( 0.5, 0.5 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -58,9 +70,9 @@ patch_margin_left = 10
 patch_margin_top = 10
 patch_margin_right = 10
 patch_margin_bottom = 10
-_sections_unfolded = [ "Axis Stretch", "Patch Margin" ]
+_sections_unfolded = [ "Axis Stretch", "Focus", "Hint", "Mouse", "Patch Margin", "Rect", "Size Flags", "Theme" ]
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/Panel" index="0"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/Fuel Panel" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -78,7 +90,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Margin" ]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/MarginContainer" index="0"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Fuel Panel/MarginContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -95,7 +107,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 0
 
-[node name="MainFuelDisplay" type="Container" parent="Control/Panel/MarginContainer/VBoxContainer" index="0"]
+[node name="MainFuelDisplay" type="Container" parent="Control/Fuel Panel/MarginContainer/VBoxContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -111,7 +123,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 3
 _sections_unfolded = [ "Size Flags" ]
 
-[node name="LabelBackgroundMainFuel" type="NinePatchRect" parent="Control/Panel/MarginContainer/VBoxContainer/MainFuelDisplay" index="0"]
+[node name="LabelBackgroundMainFuel" type="NinePatchRect" parent="Control/Fuel Panel/MarginContainer/VBoxContainer/MainFuelDisplay" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -133,7 +145,7 @@ patch_margin_right = 10
 patch_margin_bottom = 10
 _sections_unfolded = [ "Margin", "Patch Margin" ]
 
-[node name="Label" type="Label" parent="Control/Panel/MarginContainer/VBoxContainer/MainFuelDisplay/LabelBackgroundMainFuel" index="0"]
+[node name="Label" type="Label" parent="Control/Fuel Panel/MarginContainer/VBoxContainer/MainFuelDisplay/LabelBackgroundMainFuel" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -157,14 +169,14 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="Main_Fuel_Warning" parent="Control/Panel/MarginContainer/VBoxContainer/MainFuelDisplay" index="1" instance=ExtResource( 5 )]
+[node name="Main_Fuel_Warning" parent="Control/Fuel Panel/MarginContainer/VBoxContainer/MainFuelDisplay" index="1" instance=ExtResource( 5 )]
 
 margin_left = 0.0
 margin_top = 40.0
 margin_right = 303.0
 margin_bottom = 40.0
 
-[node name="MainFuel_Bar" type="TextureProgress" parent="Control/Panel/MarginContainer/VBoxContainer/MainFuelDisplay" index="2"]
+[node name="MainFuel_Bar" type="TextureProgress" parent="Control/Fuel Panel/MarginContainer/VBoxContainer/MainFuelDisplay" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -199,8 +211,9 @@ stretch_margin_right = 10
 stretch_margin_bottom = 10
 _sections_unfolded = [ "Textures" ]
 
-[node name="RCFuelDisplay" type="Container" parent="Control/Panel/MarginContainer/VBoxContainer" index="1"]
+[node name="RCFuelDisplay" type="Container" parent="Control/Fuel Panel/MarginContainer/VBoxContainer" index="1"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -216,7 +229,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 3
 _sections_unfolded = [ "Size Flags" ]
 
-[node name="LabelBackgroundRC" type="NinePatchRect" parent="Control/Panel/MarginContainer/VBoxContainer/RCFuelDisplay" index="0"]
+[node name="LabelBackgroundRC" type="NinePatchRect" parent="Control/Fuel Panel/MarginContainer/VBoxContainer/RCFuelDisplay" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -238,7 +251,7 @@ patch_margin_right = 10
 patch_margin_bottom = 10
 _sections_unfolded = [ "Margin", "Patch Margin" ]
 
-[node name="Label2" type="Label" parent="Control/Panel/MarginContainer/VBoxContainer/RCFuelDisplay/LabelBackgroundRC" index="0"]
+[node name="Label2" type="Label" parent="Control/Fuel Panel/MarginContainer/VBoxContainer/RCFuelDisplay/LabelBackgroundRC" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -263,14 +276,14 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="RC_Fuel_Warning" parent="Control/Panel/MarginContainer/VBoxContainer/RCFuelDisplay" index="1" instance=ExtResource( 5 )]
+[node name="RC_Fuel_Warning" parent="Control/Fuel Panel/MarginContainer/VBoxContainer/RCFuelDisplay" index="1" instance=ExtResource( 5 )]
 
 margin_left = 0.0
 margin_top = 48.0
 margin_right = 303.0
 margin_bottom = 48.0
 
-[node name="RCFuel_Bar" type="TextureProgress" parent="Control/Panel/MarginContainer/VBoxContainer/RCFuelDisplay" index="2"]
+[node name="RCFuel_Bar" type="TextureProgress" parent="Control/Fuel Panel/MarginContainer/VBoxContainer/RCFuelDisplay" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -305,13 +318,13 @@ stretch_margin_right = 10
 stretch_margin_bottom = 10
 _sections_unfolded = [ "Textures" ]
 
-[node name="fuel_tank" type="Sprite" parent="Control/Panel" index="1"]
+[node name="fuel_tank" type="Sprite" parent="Control/Fuel Panel" index="1"]
 
 visible = false
 position = Vector2( 36.7455, 51.5805 )
 texture = ExtResource( 9 )
 
-[node name="fuel" type="Sprite" parent="Control/Panel" index="2"]
+[node name="fuel" type="Sprite" parent="Control/Fuel Panel" index="2"]
 
 visible = false
 position = Vector2( 53.8074, 84.3012 )
@@ -322,13 +335,13 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 32, 65 )
 _sections_unfolded = [ "Offset", "Region", "Transform" ]
 
-[node name="rc_fuel_tank" type="Sprite" parent="Control/Panel" index="3"]
+[node name="rc_fuel_tank" type="Sprite" parent="Control/Fuel Panel" index="3"]
 
 visible = false
 position = Vector2( 37.5019, 140.864 )
 texture = ExtResource( 11 )
 
-[node name="rc_fuel" type="Sprite" parent="Control/Panel" index="4"]
+[node name="rc_fuel" type="Sprite" parent="Control/Fuel Panel" index="4"]
 
 visible = false
 position = Vector2( 50.486, 164.63 )
@@ -340,11 +353,186 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 28, 54 )
 _sections_unfolded = [ "Offset", "Region" ]
 
-[node name="Winner" type="Sprite" parent="Control" index="1"]
+[node name="Navigation Panel" type="NinePatchRect" parent="Control" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 885.0
+margin_top = 13.0
+margin_right = 1134.0
+margin_bottom = 117.0
+rect_scale = Vector2( 0.5, 0.5 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 2 )
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+_sections_unfolded = [ "Axis Stretch", "Patch Margin", "Rect" ]
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Navigation Panel" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 20.0
+margin_top = 19.0
+margin_right = 225.0
+margin_bottom = 83.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_constants/margin_left = 1
+_sections_unfolded = [ "Margin", "custom_constants" ]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Navigation Panel/MarginContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1.0
+margin_right = 205.0
+margin_bottom = 64.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 0
+
+[node name="LabelBackgroundMainFuel2" type="NinePatchRect" parent="Control/Navigation Panel/MarginContainer/VBoxContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 204.0
+margin_bottom = 20.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 3 )
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+_sections_unfolded = [ "Margin", "Patch Margin" ]
+
+[node name="Label" type="Label" parent="Control/Navigation Panel/MarginContainer/VBoxContainer/LabelBackgroundMainFuel2" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 3.0
+margin_top = 2.0
+margin_right = 201.0
+margin_bottom = 19.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 4 )
+text = "Height Over Terrain"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_fonts" ]
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Control/Navigation Panel/MarginContainer/VBoxContainer" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 24.0
+margin_right = 204.0
+margin_bottom = 64.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 13 )
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
+_sections_unfolded = [ "Patch Margin" ]
+
+[node name="HOT_Display" type="Label" parent="Control/Navigation Panel/MarginContainer/VBoxContainer/NinePatchRect" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 5.0
+margin_top = 2.0
+margin_right = 176.0
+margin_bottom = 37.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 1 )
+text = "1234"
+align = 2
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_fonts" ]
+
+[node name="Unit" type="Label" parent="Control/Navigation Panel/MarginContainer/VBoxContainer/NinePatchRect" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 105.0
+margin_top = 17.0
+margin_right = 194.0
+margin_bottom = 52.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 4 )
+text = "m"
+align = 2
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_fonts" ]
+
+[node name="Winner" type="Sprite" parent="Control" index="2"]
 
 visible = false
 position = Vector2( 507.579, 272.349 )
 scale = Vector2( 3.97904, 3.97904 )
-texture = ExtResource( 13 )
+texture = ExtResource( 15 )
 
 

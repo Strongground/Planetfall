@@ -1,0 +1,197 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://lander.gd" type="Script" id=1]
+[ext_resource path="res://eagle.png" type="Texture" id=2]
+[ext_resource path="res://smoke_white.png" type="Texture" id=3]
+[ext_resource path="res://rc_thruster_particles.tres" type="Material" id=4]
+
+[sub_resource type="Gradient" id=1]
+
+offsets = PoolRealArray( 0.405594, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=2]
+
+flags = 4
+gradient = SubResource( 1 )
+width = 256
+
+[sub_resource type="Curve" id=3]
+
+min_value = -200.0
+max_value = 200.0
+bake_resolution = 100
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+
+flags = 4
+width = 2048
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+
+resource_name = "MainEngineParticles"
+render_priority = 0
+trail_divisor = 1
+emission_shape = 0
+flag_align_y = false
+flag_rotate_y = false
+flag_disable_z = true
+spread = 10.0
+flatness = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 150.0
+initial_velocity_random = 0.12
+angular_velocity = 0.0
+angular_velocity_random = 0.78
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 0.0
+linear_accel_random = 0.0
+linear_accel_curve = SubResource( 4 )
+radial_accel = -53.38
+radial_accel_random = 0.0
+tangential_accel = 0.0
+tangential_accel_random = 0.0
+damping = 100.0
+damping_random = 0.0
+angle = 360.0
+angle_random = 1.0
+scale = 0.75
+scale_random = 1.0
+color_ramp = SubResource( 2 )
+hue_variation = 0.0
+hue_variation_random = 0.0
+anim_speed = 1.3
+anim_speed_random = 0.0
+anim_offset = 0.0
+anim_offset_random = 0.0
+anim_loop = false
+_sections_unfolded = [ "Color", "Emission Shape", "Initial Velocity", "Radial Accel", "Resource", "Scale", "Spread" ]
+
+[node name="MoonLander" type="RigidBody2D"]
+
+position = Vector2( 80.5384, -141.028 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+mode = 0
+mass = 1.0
+friction = 1.0
+bounce = 0.0
+gravity_scale = 1.0
+custom_integrator = false
+continuous_cd = 0
+contacts_reported = 1
+contact_monitor = true
+sleeping = false
+can_sleep = false
+linear_velocity = Vector2( 0, 0 )
+linear_damp = -1.0
+angular_velocity = 0.0
+angular_damp = -1.0
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform", "collision" ]
+__meta__ = {
+"_edit_group_": true
+}
+main_engine_thrust = 80
+rc_thrust = 100
+fuel_capacity = 200.0
+rc_fuel_capacity = 50.0
+damage_treshhold = 10.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="0"]
+
+rotation = -1.57079
+build_mode = 0
+polygon = PoolVector2Array( -17.1793, 13.1874, -14.7068, 13.1874, -10.1029, 1.76285, -10.3587, 7.64562, -2.0034, 7.56036, -1.32936, 9.95712, 2.14179, 9.95709, 2.85628, 7.64562, 7.28967, 7.04882, 11.7231, 7.56036, 14.9629, 13.4431, 18.0321, 13.3579, 10.7852, -1.22117, 9.42111, -1.22117, 9.33586, -5.31353, 6.18132, -8.72384, 6.01082, -12.9867, -7.6304, -13.2425, -5.41371, -10.429, -5.15794, -6.50714, -7.37463, -7.786, -8.31247, -4.80199, -5.41371, -3.18209, -5.41371, -0.368591, -11.467, -0.368591 )
+
+[node name="eagle" type="Sprite" parent="." index="1"]
+
+rotation = -1.57079
+texture = ExtResource( 2 )
+
+[node name="EngineParticles" type="Particles2D" parent="." index="2"]
+
+position = Vector2( 12, 1 )
+emitting = false
+amount = 50
+lifetime = 1.5
+one_shot = false
+preprocess = 0.0
+speed_scale = 1.0
+explosiveness = 0.0
+randomness = 0.3
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = false
+draw_order = 0
+process_material = SubResource( 5 )
+texture = ExtResource( 3 )
+normal_map = null
+h_frames = 8
+v_frames = 1
+_sections_unfolded = [ "Drawing", "Process Material", "Textures", "Time" ]
+
+[node name="RCThrusterParticles_Left" type="Particles2D" parent="." index="3"]
+
+position = Vector2( -9.00001, -9 )
+rotation = 4.97418
+emitting = false
+amount = 100
+lifetime = 0.15
+one_shot = false
+preprocess = 0.0
+speed_scale = 1.0
+explosiveness = 0.0
+randomness = 0.3
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = false
+draw_order = 0
+process_material = ExtResource( 4 )
+texture = ExtResource( 3 )
+normal_map = null
+h_frames = 8
+v_frames = 1
+_sections_unfolded = [ "Drawing", "Process Material", "Textures", "Time" ]
+
+[node name="RCThrusterParticles_Right" type="Particles2D" parent="." index="4"]
+
+position = Vector2( -9.00002, 8.99998 )
+rotation = 1.309
+emitting = false
+amount = 100
+lifetime = 0.15
+one_shot = false
+preprocess = 0.0
+speed_scale = 1.0
+explosiveness = 0.0
+randomness = 0.3
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = false
+draw_order = 0
+process_material = ExtResource( 4 )
+texture = ExtResource( 3 )
+normal_map = null
+h_frames = 8
+v_frames = 1
+_sections_unfolded = [ "Drawing", "Process Material", "Textures", "Time" ]
+
+[node name="RayCast2D" type="RayCast2D" parent="." index="5"]
+
+enabled = true
+exclude_parent = true
+cast_to = Vector2( 50, 0 )
+collision_mask = 1
+_sections_unfolded = [ "Transform" ]
+
+[connection signal="body_entered" from="." to="." method="_on_MoonLander_body_entered"]
+
+
