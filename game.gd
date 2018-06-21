@@ -9,6 +9,7 @@ onready var gui = get_node("CameraContainer/Camera2D/GUI")
 
 func _ready():
 	lander.set_rotation_degrees(90)
+	# lander.add_to_inventory('food', 5)
 
 func _process(delta):
 	# camera position synced to lander

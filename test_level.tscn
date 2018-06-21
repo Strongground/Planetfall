@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://game.gd" type="Script" id=1]
-[ext_resource path="res://background.png" type="Texture" id=2]
+[ext_resource path="res://background2.png" type="Texture" id=2]
 [ext_resource path="res://level.png" type="Texture" id=3]
 [ext_resource path="res://gui.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Camera2D.gd" type="Script" id=5]
@@ -104,7 +104,7 @@ limit_bottom = 10000000
 limit_smoothed = false
 drag_margin_h_enabled = false
 drag_margin_v_enabled = false
-smoothing_enabled = true
+smoothing_enabled = false
 smoothing_speed = 5.0
 offset_v = 0.0
 offset_h = 0.0
@@ -120,6 +120,12 @@ _sections_unfolded = [ "Smoothing" ]
 
 [node name="MoonLander" parent="." index="3" instance=ExtResource( 6 )]
 
+main_engine_thrust = 160
+rc_thrust = 200
+fuel_capacity = 20000.0
+rc_fuel_capacity = 5000.0
+damage_treshhold = 100.0
+
 [node name="InputManager" type="Node2D" parent="." index="4"]
 
 script = ExtResource( 7 )
@@ -127,11 +133,56 @@ script = ExtResource( 7 )
 [node name="LandingTarget" parent="." index="5" instance=ExtResource( 8 )]
 
 position = Vector2( -154.324, 55.5136 )
+delivery_good = 1
+goods_amount = 15
 
-[node name="Marker" type="Sprite" parent="." index="6"]
+[node name="Marker_Debug" type="Sprite" parent="." index="6"]
 
-visible = false
 position = Vector2( -781.656, -60.0411 )
 texture = ExtResource( 9 )
+
+[node name="HOT_Debug" type="Label" parent="." index="7"]
+
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -324.0
+margin_top = -96.0
+margin_right = -133.0
+margin_bottom = -82.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "Terrain Collision Coordinates: "
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="HOT_Debug2" type="Label" parent="." index="8"]
+
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -324.0
+margin_top = -76.0
+margin_right = -133.0
+margin_bottom = -62.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "Terrain Collision Coordinates: "
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 

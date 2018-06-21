@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://lander.gd" type="Script" id=1]
 [ext_resource path="res://eagle.png" type="Texture" id=2]
 [ext_resource path="res://smoke_white.png" type="Texture" id=3]
 [ext_resource path="res://rc_thruster_particles.tres" type="Material" id=4]
+[ext_resource path="res://space_theme_ui/barHorizontal_red_mid.png" type="Texture" id=5]
 
 [sub_resource type="Gradient" id=1]
 
@@ -77,7 +78,7 @@ input_pickable = false
 collision_layer = 1
 collision_mask = 1
 mode = 0
-mass = 1.0
+mass = 1.25
 friction = 1.0
 bounce = 0.0
 gravity_scale = 1.0
@@ -93,14 +94,12 @@ angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform", "collision" ]
-__meta__ = {
-"_edit_group_": true
-}
 main_engine_thrust = 80
 rc_thrust = 100
 fuel_capacity = 200.0
 rc_fuel_capacity = 50.0
 damage_treshhold = 10.0
+inventory_space = 5
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="0"]
 
@@ -188,9 +187,18 @@ _sections_unfolded = [ "Drawing", "Process Material", "Textures", "Time" ]
 
 enabled = true
 exclude_parent = true
-cast_to = Vector2( 50, 0 )
+cast_to = Vector2( 0, 1000 )
 collision_mask = 1
 _sections_unfolded = [ "Transform" ]
+
+[node name="Ray" type="Sprite" parent="." index="6"]
+
+visible = false
+position = Vector2( 1.41918, 0.734558 )
+scale = Vector2( 13.3166, 0.136402 )
+texture = ExtResource( 5 )
+centered = false
+_sections_unfolded = [ "Offset", "Transform" ]
 
 [connection signal="body_entered" from="." to="." method="_on_MoonLander_body_entered"]
 
