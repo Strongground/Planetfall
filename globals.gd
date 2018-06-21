@@ -1,6 +1,6 @@
 extends Node
 
-var goods = {
+const goods = {
 	'food': {
 		'display_name': 'Food Supplies',
 		'amount': 0,
@@ -15,6 +15,14 @@ var goods = {
 	}
 }
 
-func get_weight(item):
+func get_goods_weight(item):
 	if item in goods:
 		return goods[item]['weight']
+	else:
+		return false
+		
+func get_goods_name(item):
+	if item in goods:
+		return goods[item]['display_name']
+	else:
+		return false

@@ -55,13 +55,9 @@ func _process(delta):
 		_rc_thruster_particles_right.set_emitting(false)
 		_rotation_dir = 0
 	# Calculate height over terrain
-	# _ray.set_global_rotation_degrees(90)
 	_raycast.set_cast_to(Vector2(1000, 0))
 	_raycast.set_global_rotation_degrees(90)
 	_terrain_collision = _raycast.get_collision_point()
-	# _marker1.set_position(_terrain_collision)
-	# _label1.set_text("Ray global rotation: " + str(_ray.get_global_rotation()))
-	# _label2.set_text("Lander rotation: " + str(self.get_rotation()))
 	height_over_terrain = _terrain_collision.distance_to(self.get_global_transform().get_origin()) - 10
 	if height_over_terrain < 0:
 		height_over_terrain = 0
@@ -140,7 +136,7 @@ func _on_MoonLander_body_entered(body):
 func _recalculate_inventory_weight():
 	var item_weight = 0.0
 	for item in inventory:
-		item_weight += globals.get_weight(item) * inventory[item]['amount']
+		item_weight += globals.get_goods_weight(item) * inventory[item]['amount']
 	inventory_weight = (item_weight) * 100
 	print("Inventory weight: " + str(inventory_weight))
 		
@@ -181,7 +177,10 @@ func remove_from_inventory(item, amount):
 		print("Item " + str(globals[item]['display_name']) + " not in inventory")
 
 func has_loaded(item, amount):
-	if item in inventory and inventory[item]['amount'] >= amount:
-		return true
+	if item in inventory:
+		if inventory[item]['amount'] >= amount:
+			return amount
+		else:
+			return inventory[item]['amount']
 	else:
 		return false

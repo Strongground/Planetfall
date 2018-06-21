@@ -15,4 +15,4 @@ func _process(delta):
 	
 func _input(event):
 	if Input.is_action_pressed("game_quit"):
-		get_tree().quit()
+		get_tree().change_scene("res://main_menu.tscn")

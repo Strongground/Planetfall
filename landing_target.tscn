@@ -11,6 +11,8 @@ extents = Vector2( 4.41723, 0.823472 )
 [node name="LandingTarget" type="Node2D"]
 
 script = ExtResource( 1 )
+expected_delivery_good = "none"
+expected_goods_amount = 0
 
 [node name="Indicator" type="Sprite" parent="." index="0"]
 
