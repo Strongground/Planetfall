@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://contract.gd" type="Script" id=1]
+
+[node name="Contract" type="Node2D"]
+
+script = ExtResource( 1 )
+title = ""
+description = ""
+timed = false
+pay = 0
+goods = "none"
+goods_amount = 0
+origin_id = ""
+target_id = ""
+id = ""
+
+

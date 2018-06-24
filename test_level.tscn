@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://game.gd" type="Script" id=1]
 [ext_resource path="res://background2.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://inputMgr.gd" type="Script" id=7]
 [ext_resource path="res://landing_target.tscn" type="PackedScene" id=8]
 [ext_resource path="res://space_theme_ui/crossair_redOutline.png" type="Texture" id=9]
+[ext_resource path="res://contract.tscn" type="PackedScene" id=10]
 
 [node name="Game" type="Node2D" index="0"]
 
@@ -120,28 +121,40 @@ _sections_unfolded = [ "Smoothing" ]
 
 [node name="MoonLander" parent="." index="3" instance=ExtResource( 6 )]
 
+position = Vector2( -155.462, -141.028 )
 main_engine_thrust = 160
 rc_thrust = 300
-fuel_capacity = 300.0
-rc_fuel_capacity = 100.0
-damage_treshhold = 12.0
+fuel_capacity = 3000.0
+rc_fuel_capacity = 1000.0
+damage_treshhold = 1200.0
+credits_balance = 100
 
 [node name="InputManager" type="Node2D" parent="." index="4"]
 
 script = ExtResource( 7 )
 
-[node name="LandingTarget" parent="." index="5" instance=ExtResource( 8 )]
+[node name="LandingTarget" parent="." index="5" groups=[
+"landing_targets",
+] instance=ExtResource( 8 )]
 
 position = Vector2( -154.324, 55.5136 )
-expected_delivery_good = "food"
-expected_goods_amount = 2
+id = "farm"
+description = "a local farm"
 
-[node name="Marker_Debug" type="Sprite" parent="." index="6"]
+[node name="LandingTarget2" parent="." index="6" groups=[
+"landing_targets",
+] instance=ExtResource( 8 )]
+
+position = Vector2( 237.019, 44.7799 )
+id = "grocery"
+description = "a local grocery store"
+
+[node name="Marker_Debug" type="Sprite" parent="." index="7"]
 
 position = Vector2( -781.656, -60.0411 )
 texture = ExtResource( 9 )
 
-[node name="HOT_Debug" type="Label" parent="." index="7"]
+[node name="HOT_Debug" type="Label" parent="." index="8"]
 
 visible = false
 anchor_left = 0.0
@@ -163,7 +176,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="HOT_Debug2" type="Label" parent="." index="8"]
+[node name="HOT_Debug2" type="Label" parent="." index="9"]
 
 visible = false
 anchor_left = 0.0
@@ -184,5 +197,16 @@ text = "Terrain Collision Coordinates: "
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+
+[node name="Contract" parent="." index="10" instance=ExtResource( 10 )]
+
+position = Vector2( 320.505, -176.137 )
+title = "\"Food Delivery\""
+pay = 800
+goods = "food"
+goods_amount = 5
+origin_id = "farm"
+target_id = "grocery"
+id = "test_food"
 
 

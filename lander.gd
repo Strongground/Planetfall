@@ -7,6 +7,7 @@ export (float) var fuel_capacity = 200
 export (float) var rc_fuel_capacity = 50
 export (float) var damage_treshhold = 10
 export (int) var inventory_space = 5
+export (int) var credits_balance = 100
 
 # class members
 onready var _game = get_tree().get_current_scene()
@@ -17,6 +18,7 @@ onready var _rc_thruster_particles_left = get_node("RCThrusterParticles_Left")
 onready var _raycast = get_node("RayCast2D")
 onready var _explosion = load("res://explosion.tscn")
 onready var _debris = load("res://lander_debris.tscn")
+onready var _gui = _game.find_node("GUI")
 # ++++++++ Debug ++++++++
 onready var _marker1 = _game.find_node("Marker_Debug")
 onready var _label1 = _game.find_node("HOT_Debug")
@@ -26,6 +28,7 @@ onready var _ray = _game.find_node("Ray")
 var _rotation_dir = 0
 var _has_landed_for = 0
 var _terrain_collision = Vector2(0,0)
+var _double_rc = false
 var thrust = Vector2()
 var fuel = 0.0
 var rc_fuel = 0.0
@@ -35,6 +38,7 @@ var height_over_terrain = 0.0
 var inventory = {}
 var inventory_weight = 0.0
 var craft_weight = 0.0
+var contracts = []
 
 func _ready():
 	# sign main engine thrust negative
@@ -45,8 +49,9 @@ func _ready():
 	craft_weight = get_weight() * 100
 
 func _process(delta):
+	# Set physical weight of craft to craft weight plus inventory weight
 	set_weight(craft_weight + inventory_weight)
-	
+	# If fuel is empty, switch thrust and effects off
 	if fuel <= 0:
 		_engine_particles.set_emitting(false)
 		thrust = Vector2(0,0)
@@ -90,6 +95,10 @@ func _integrate_forces(state):
 	if Input.is_action_just_released("ui_left"):
 		_rotation_dir = 0
 		_rc_thruster_particles_left.set_emitting(false)
+		
+	if Input.is_action_pressed("ui_left") && Input.is_action_pressed("ui_right"):
+		if rc_fuel > 0:
+			_double_rc == true
 	
 	# print(str(abs(get_linear_velocity().x)) + ", " + str(abs(get_linear_velocity().y)))
 	# print("Has landed: " + str(landed) + ", has landed for: " + str(_has_landed_for))
@@ -107,7 +116,10 @@ func _integrate_forces(state):
 	if abs(thrust.x) > 0 and fuel > 0:
 		fuel -= abs(thrust.x) / 100.0
 	if abs(_rotation_dir) >= 1 and rc_fuel > 0:
-		rc_fuel -= rc_thrust / 1000.0
+		if _double_rc == true:
+			rc_fuel -= rc_thrust / 500.0
+		else:
+			rc_fuel -= rc_thrust / 1000.0
 
 	# finally apply forces
 	set_applied_force(thrust.rotated(get_rotation()))
@@ -154,6 +166,7 @@ func add_to_inventory(item, amount):
 				inventory[item] = new_item
 				print("Added goods " + str(new_item) + " to inventory.")
 			_recalculate_inventory_weight()
+			_gui.add_inventory_item(item, amount)
 		else:
 			print("Not enough space in inventory! Would need " + str(amount) + " but only " + str(inventory_space - inventory.size()) + " is available.")
 	else:
@@ -163,14 +176,19 @@ func remove_from_inventory(item, amount):
 	# Is good in inventory?
 	if item in inventory:
 		# Is enough of it in inventory?
+		print("Check if "+str(inventory[item]['amount'])+" is >= " + str(amount))
 		if inventory[item]['amount'] >= amount:
+			# Remove from GUI first, because it checks for inventory content to do its thing!
+			_gui.remove_inventory_item(item, amount)
 			# Will this set the amount of the good to zero? Then remove the item.
+			print("Check now if "+str(inventory[item]['amount']) + " - " + str(amount)+" == 0")
 			if inventory[item]['amount'] - amount == 0:
 				inventory.erase(item)
 			# Else just decrease amount
 			else:
 				inventory[item]['amount'] -= amount
 			_recalculate_inventory_weight()
+		
 		else:
 			print("No " + str(amount) + " items of " + str(globals[item]['display_name']) + " found in inventory.")
 	else:
@@ -184,3 +202,16 @@ func has_loaded(item, amount):
 			return inventory[item]['amount']
 	else:
 		return false
+
+func can_load(amount):
+	return self.inventory.size() + amount <= self.inventory_space
+		
+func accept_contract(contract_id):
+	var _contract = _game.get_contract(contract_id)
+	contracts.push_back(_contract)
+	_contract.accepted = true
+	print("Contract accepted")
+
+func add_credits(sum):
+	self.credits_balance += sum
+
