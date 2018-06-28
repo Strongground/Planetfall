@@ -18,7 +18,6 @@ onready var _rc_thruster_particles_left = get_node("RCThrusterParticles_Left")
 onready var _raycast = get_node("RayCast2D")
 onready var _explosion = load("res://explosion.tscn")
 onready var _debris = load("res://lander_debris.tscn")
-onready var _gui = _game.find_node("GUI")
 # ++++++++ Debug ++++++++
 onready var _marker1 = _game.find_node("Marker_Debug")
 onready var _label1 = _game.find_node("HOT_Debug")
@@ -127,7 +126,7 @@ func _integrate_forces(state):
 
 # On collision
 func _on_MoonLander_body_entered(body):
-	print("Collision with force: " + str(get_linear_velocity()))
+#	print("Collision with force: " + str(get_linear_velocity()))
 	if abs(get_linear_velocity().x) >= damage_treshhold or abs(get_linear_velocity().y) >= damage_treshhold:
 		if self.alive == true:
 			var _lander_explosion = _explosion.instance()
@@ -150,7 +149,7 @@ func _recalculate_inventory_weight():
 	for item in inventory:
 		item_weight += globals.get_goods_weight(item) * inventory[item]['amount']
 	inventory_weight = (item_weight) * 100
-	print("Inventory weight: " + str(inventory_weight))
+#	print("Inventory weight: " + str(inventory_weight))
 		
 func add_to_inventory(item, amount):
 	if item in globals.goods:
@@ -158,41 +157,40 @@ func add_to_inventory(item, amount):
 			# If same good is already in inventory just increase amount 
 			if item in inventory:
 				inventory[item]['amount'] += amount
-				print("Increased amount of goods")
+#				print("Increased amount of goods")
 			# Else create the position
 			else:
 				var new_item = globals.goods[item]
 				new_item['amount'] = amount
 				inventory[item] = new_item
-				print("Added goods " + str(new_item) + " to inventory.")
+#				print("Added goods " + str(new_item) + " to inventory.")
 			_recalculate_inventory_weight()
-			_gui.add_inventory_item(item, amount)
-		else:
-			print("Not enough space in inventory! Would need " + str(amount) + " but only " + str(inventory_space - inventory.size()) + " is available.")
-	else:
-		print("Item " + str(item) + " does not exist in " + str(globals.goods) + "!")
+			_game.gui.add_inventory_item(item, amount)
+#		else:
+#			print("Not enough space in inventory! Would need " + str(amount) + " but only " + str(inventory_space - inventory.size()) + " is available.")
+#	else:
+#		print("Item " + str(item) + " does not exist in " + str(globals.goods) + "!")
 
 func remove_from_inventory(item, amount):
 	# Is good in inventory?
 	if item in inventory:
 		# Is enough of it in inventory?
-		print("Check if "+str(inventory[item]['amount'])+" is >= " + str(amount))
+#		print("Check if "+str(inventory[item]['amount'])+" is >= " + str(amount))
 		if inventory[item]['amount'] >= amount:
 			# Remove from GUI first, because it checks for inventory content to do its thing!
-			_gui.remove_inventory_item(item, amount)
+			_game.gui.remove_inventory_item(item, amount)
 			# Will this set the amount of the good to zero? Then remove the item.
-			print("Check now if "+str(inventory[item]['amount']) + " - " + str(amount)+" == 0")
+#			print("Check now if "+str(inventory[item]['amount']) + " - " + str(amount)+" == 0")
 			if inventory[item]['amount'] - amount == 0:
 				inventory.erase(item)
 			# Else just decrease amount
 			else:
 				inventory[item]['amount'] -= amount
 			_recalculate_inventory_weight()
-		
-		else:
-			print("No " + str(amount) + " items of " + str(globals[item]['display_name']) + " found in inventory.")
-	else:
-		print("Item " + str(globals[item]['display_name']) + " not in inventory")
+#		else:
+#			print("No " + str(amount) + " items of " + str(globals[item]['display_name']) + " found in inventory.")
+#	else:
+#		print("Item " + str(globals[item]['display_name']) + " not in inventory")
 
 func has_loaded(item, amount):
 	if item in inventory:
@@ -208,10 +206,11 @@ func can_load(amount):
 		
 func accept_contract(contract_id):
 	var _contract = _game.get_contract(contract_id)
-	contracts.push_back(_contract)
+	self.contracts.push_back(_contract)
 	_contract.accepted = true
-	print("Contract accepted")
+	_game.gui.add_contract(_contract)
+	_game.create_floater("Contract accepted!")
 
 func add_credits(sum):
 	self.credits_balance += sum
-
+	_game.create_floater("Contract completed!\nYou earned "+str(sum)+" Cr")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://gui.gd" type="Script" id=1]
 [ext_resource path="res://inventory_slot.tscn" type="PackedScene" id=2]
@@ -16,6 +16,8 @@
 [ext_resource path="res://space_theme_ui/glassPanel_corners.png" type="Texture" id=14]
 [ext_resource path="res://fonts/kenvector_future.ttf" type="DynamicFontData" id=15]
 [ext_resource path="res://winner_overlay.png" type="Texture" id=16]
+[ext_resource path="res://overlay.tscn" type="PackedScene" id=17]
+[ext_resource path="res://space_theme_ui/glassPanel_cornerTL.png" type="Texture" id=18]
 
 [sub_resource type="DynamicFont" id=1]
 
@@ -469,6 +471,7 @@ _sections_unfolded = [ "custom_fonts" ]
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Control/Navigation Panel/MarginContainer/VBoxContainer" index="1"]
 
+self_modulate = Color( 0.533333, 0.533333, 0.533333, 1 )
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -487,7 +490,7 @@ patch_margin_left = 20
 patch_margin_top = 20
 patch_margin_right = 20
 patch_margin_bottom = 20
-_sections_unfolded = [ "Patch Margin" ]
+_sections_unfolded = [ "Patch Margin", "Visibility" ]
 
 [node name="HOT_Display" type="Label" parent="Control/Navigation Panel/MarginContainer/VBoxContainer/NinePatchRect" index="0"]
 
@@ -511,7 +514,7 @@ align = 2
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "custom_fonts" ]
+_sections_unfolded = [ "Visibility", "custom_fonts" ]
 
 [node name="Unit" type="Label" parent="Control/Navigation Panel/MarginContainer/VBoxContainer/NinePatchRect" index="1"]
 
@@ -539,6 +542,7 @@ _sections_unfolded = [ "custom_fonts" ]
 
 [node name="Credits Panel" type="NinePatchRect" parent="Control" index="3"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -644,6 +648,7 @@ _sections_unfolded = [ "custom_fonts" ]
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Control/Credits Panel/MarginContainer/VBoxContainer" index="1"]
 
+self_modulate = Color( 0.533333, 0.533333, 0.533333, 1 )
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -662,7 +667,7 @@ patch_margin_left = 20
 patch_margin_top = 20
 patch_margin_right = 20
 patch_margin_bottom = 20
-_sections_unfolded = [ "Patch Margin" ]
+_sections_unfolded = [ "Patch Margin", "Visibility" ]
 
 [node name="Credits_Display" type="Label" parent="Control/Credits Panel/MarginContainer/VBoxContainer/NinePatchRect" index="0"]
 
@@ -843,5 +848,112 @@ visible = false
 position = Vector2( 507.579, 272.349 )
 scale = Vector2( 3.97904, 3.97904 )
 texture = ExtResource( 16 )
+
+[node name="Overlay" parent="Control" index="6" instance=ExtResource( 17 )]
+
+[node name="Contracts Panel" type="NinePatchRect" parent="Control" index="7"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 781.0
+margin_top = 133.0
+margin_right = 1013.0
+margin_bottom = 210.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 18 )
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 10
+patch_margin_bottom = 10
+_sections_unfolded = [ "Patch Margin" ]
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Contracts Panel" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 10.0
+margin_right = -20.0
+margin_bottom = -20.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+_sections_unfolded = [ "Margin", "Rect", "Size Flags" ]
+
+[node name="Contracts Container" type="VBoxContainer" parent="Control/Contracts Panel/MarginContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 8.0
+margin_right = 192.0
+margin_bottom = 17.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 2
+alignment = 0
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Size Flags", "Theme" ]
+
+[node name="Label" type="Label" parent="Control/Contracts Panel/MarginContainer/Contracts Container" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 184.0
+margin_bottom = 17.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 5 )
+text = "Contracts"
+clip_text = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_fonts" ]
+
+[node name="Label" type="Label" parent="." index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1336.0
+margin_top = 184.0
+margin_right = 1476.0
+margin_bottom = 201.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 5 )
+text = "Default Text"
+clip_text = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_fonts" ]
 
 

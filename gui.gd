@@ -13,6 +13,9 @@ onready var _hot_display = get_node("Control/Navigation Panel/MarginContainer/VB
 onready var _inventory_container = get_node("Control/Inventory Panel/MarginContainer/VBoxContainer/Inventory")
 onready var _inventory_slot = preload("res://inventory_slot.tscn")
 onready var _credits_display = get_node("Control/Credits Panel/MarginContainer/VBoxContainer/NinePatchRect/Credits_Display")
+onready var _contracts_container = get_node("Control/Contracts Panel/MarginContainer/Contracts Container")
+onready var _empty_label = get_node("Label")
+onready var overlay = get_node("Control/Overlay")
 
 var _inventory_slots = []
 
@@ -80,20 +83,25 @@ func remove_inventory_item(item, amount):
 	if item in globals.goods:
 		var _inventory_as_array = _lander.inventory.keys()
 		var _existing_good_at_index = _inventory_as_array.find(item)
-		print("Goods index in inventory array: " + str(_existing_good_at_index))
+#		print("Goods index in inventory array: " + str(_existing_good_at_index))
 		# Check if item exists in inventory
 		if _existing_good_at_index >= 0:
-			print("Item found in inventory")
+#			print("Item found in inventory")
 			var _goods_icon = _inventory_slots[_existing_good_at_index].get_node("GoodsIcon")
 			var _goods_counter = _inventory_slots[_existing_good_at_index].get_node("Amount")
 			# Remove item completely
 			if _lander.inventory[item]['amount'] - amount <= 0:
-				print("Decided to remove completely")
+#				print("Decided to remove completely")
 				_goods_icon.set_visible(false)
 				_goods_counter.set_visible(false)
 			# Just decrease item amount
 			else:
-				print("Decided to just decrease amount")
+#				print("Decided to just decrease amount")
 				_goods_counter.set_text(_lander.inventory[item]['amount'] - amount)
 		
-# 
+func add_contract(contract_node):
+	print("Adding contract to GUI")
+	var _new_contract_label = _empty_label.duplicate()
+	_new_contract_label.set_text(contract_node.get("title"))
+	_contracts_container.add_child(_new_contract_label)
+	_new_contract_label.set_autowrap(true)

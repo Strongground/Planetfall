@@ -73,7 +73,6 @@ _sections_unfolded = [ "Color", "Emission Shape", "Initial Velocity", "Radial Ac
 
 [node name="MoonLander" type="RigidBody2D"]
 
-position = Vector2( 80.5384, -141.028 )
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
@@ -100,6 +99,7 @@ fuel_capacity = 200.0
 rc_fuel_capacity = 50.0
 damage_treshhold = 10.0
 inventory_space = 5
+credits_balance = 100
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="0"]
 
