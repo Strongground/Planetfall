@@ -72,7 +72,7 @@ func _integrate_forces(state):
 	if self.active:
 		if fuel <= 0:
 			fuel = 0
-	
+
 		# Input for vehicle controls
 		if Input.is_action_just_pressed("ui_up"):
 			if fuel > 0:
@@ -81,7 +81,7 @@ func _integrate_forces(state):
 		if Input.is_action_just_released("ui_up"):
 			thrust = Vector2(0,0)
 			_engine_particles.set_emitting(false)
-	
+
 		if Input.is_action_just_pressed("ui_right"):
 			if rc_fuel > 0:
 				_rotation_dir += 1
@@ -89,7 +89,7 @@ func _integrate_forces(state):
 		if Input.is_action_just_released("ui_right"):
 			_rotation_dir = 0
 			_rc_thruster_particles_right.set_emitting(false)
-	
+
 		if Input.is_action_just_pressed("ui_left"):
 			if rc_fuel > 0:
 				_rotation_dir -= 1
@@ -97,11 +97,11 @@ func _integrate_forces(state):
 		if Input.is_action_just_released("ui_left"):
 			_rotation_dir = 0
 			_rc_thruster_particles_left.set_emitting(false)
-			
+
 		if Input.is_action_pressed("ui_left") && Input.is_action_pressed("ui_right"):
 			if rc_fuel > 0:
 				_double_rc == true
-		
+
 		# Landed Detection
 		# print(str(abs(get_linear_velocity().x)) + ", " + str(abs(get_linear_velocity().y)))
 		# print("Has landed: " + str(landed) + ", has landed for: " + str(_has_landed_for))
@@ -114,7 +114,7 @@ func _integrate_forces(state):
 		else:
 			_has_landed_for = 0
 			self.landed = false
-			
+
 		# calc fuel usage
 		if abs(thrust.x) > 0 and fuel > 0:
 			fuel -= abs(thrust.x) / 100.0
@@ -155,11 +155,11 @@ func _recalculate_inventory_weight():
 		item_weight += globals.get_goods_weight(item) * inventory[item]['amount']
 	inventory_weight = (item_weight) * 100
 #	print("Inventory weight: " + str(inventory_weight))
-		
+
 func add_to_inventory(item, amount):
 	if item in globals.goods:
 		if amount + inventory.size() <= inventory_space:
-			# If same good is already in inventory just increase amount 
+			# If same good is already in inventory just increase amount
 			if item in inventory:
 				inventory[item]['amount'] += amount
 #				print("Increased amount of goods")
@@ -224,7 +224,7 @@ func add_credits(sum):
 # Make the player pay the given sum. If the transaction is successful,
 # "true" is returned. "false" otherwise.
 func pay(sum):
-	if self.credits_balance - sum > 0:	
+	if self.credits_balance - sum > 0:
 		self.credits_balance -= sum
 		return true
 	else:

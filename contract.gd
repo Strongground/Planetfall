@@ -33,13 +33,14 @@ func _ready():
 func _generate_id():
 	self.id = str(title) + str(OS.get_system_time_secs())
 	
-func _landed_at_landing_target(landing_target_id):
-	var _landing_target = _game.get_landing_target(landing_target_id)
-	return _landing_target.target_area.overlaps_body(_game.lander) and _game.lander.alive and _game.lander.landed
+#func _landed_at_landing_target(landing_target_id):
+#	var _landing_target = _game.get_landing_target(landing_target_id)
+#	return _landing_target.target_area.overlaps_body(_game.lander) and _game.lander.alive and _game.lander.landed
 	
 func _process(delta):
 	if self.accepted and not self.fulfilled:
-		if _landed_at_landing_target(origin_id):
+		if _game.get_landing_target(origin_id).is_landed():
+#		if _landed_at_landing_target(origin_id):
 #			print("Landed at origin")
 #			print("Conditions: ")
 #			print("Lander has not already loaded goods from here: " + str(not self.goods_origin_loaded))
@@ -47,7 +48,8 @@ func _process(delta):
 			if not self.goods_origin_loaded and _game.lander.can_load(goods_amount):
 				_game.lander.add_to_inventory(goods, goods_amount)
 				self.goods_origin_loaded = true
-		if _landed_at_landing_target(target_id):
+#		if _landed_at_landing_target(target_id):
+		if _game.get_landing_target(target_id).is_landed():
 #			print("Landed at target")
 #			print("Conditions:")
 #			print("Lander has needed goods: "+str(_game.lander.has_loaded(goods, goods_amount)))

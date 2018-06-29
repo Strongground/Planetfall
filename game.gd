@@ -14,6 +14,9 @@ func _ready():
 #	lander.add_to_inventory('food', 5)
 #	self._create_contract("Food Delivery", 800, "food", 5, "farm", "grocery", "test")
 	lander.accept_contract("test_food")
+	lander.fuel = 1200
+	lander.rc_fuel = 350
+	lander.add_credits(1000)
 
 func _process(delta):
 	# camera position synced to lander
@@ -50,7 +53,7 @@ func get_landing_target(landing_target_id):
 			return landing_target
 	return null
 
-func create_floater(text):
+func create_floater(text, parent=lander):
 	var new_floater = floater.instance()
 	self.add_child(new_floater)
-	new_floater.start(text, lander)
+	new_floater.start(text, parent)

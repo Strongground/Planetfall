@@ -121,8 +121,8 @@ _sections_unfolded = [ "Smoothing" ]
 
 [node name="MoonLander" parent="." index="3" instance=ExtResource( 6 )]
 
-position = Vector2( -337.828, 84.7556 )
-main_engine_thrust = 160
+position = Vector2( -358.199, 87.1243 )
+active = false
 rc_thrust = 300
 fuel_capacity = 3000.0
 rc_fuel_capacity = 1000.0
@@ -148,12 +148,20 @@ position = Vector2( 237.019, 44.7799 )
 id = "grocery"
 description = "a local grocery store"
 
-[node name="Marker_Debug" type="Sprite" parent="." index="7"]
+[node name="FuelStation" parent="." index="7" groups=[
+"landing_targets",
+] instance=ExtResource( 8 )]
 
-position = Vector2( -781.656, -60.0411 )
+position = Vector2( -572.182, 65.1272 )
+rotation = 0.261799
+_is_pump = true
+
+[node name="Marker_Debug" type="Sprite" parent="." index="8"]
+
+position = Vector2( -292.892, -925.706 )
 texture = ExtResource( 9 )
 
-[node name="HOT_Debug" type="Label" parent="." index="8"]
+[node name="HOT_Debug" type="Label" parent="." index="9"]
 
 visible = false
 anchor_left = 0.0
@@ -175,7 +183,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="HOT_Debug2" type="Label" parent="." index="9"]
+[node name="HOT_Debug2" type="Label" parent="." index="10"]
 
 visible = false
 anchor_left = 0.0
@@ -197,7 +205,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="Contract" parent="." index="10" instance=ExtResource( 10 )]
+[node name="Contract" parent="." index="11" instance=ExtResource( 10 )]
 
 position = Vector2( 320.505, -176.137 )
 title = "\"Food Delivery\""
