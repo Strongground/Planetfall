@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://lander.gd" type="Script" id=1]
+[ext_resource path="res://lander_mk2.gd" type="Script" id=1]
 [ext_resource path="res://eagle.png" type="Texture" id=2]
 [ext_resource path="res://smoke_white.png" type="Texture" id=3]
 [ext_resource path="res://rc_thruster_particles.tres" type="Material" id=4]
@@ -94,25 +94,59 @@ angular_damp = -1.0
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform", "collision" ]
 main_engine_thrust = 80
+active = false
 rc_thrust = 100
-fuel_capacity = 200.0
-rc_fuel_capacity = 50.0
-damage_treshhold = 10.0
+fuel_capacity = 200
+rc_fuel_capacity = 50
+damage_treshhold = 10
 inventory_space = 5
 credits_balance = 100
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="0"]
+[node name="MainBody" type="CollisionPolygon2D" parent="." index="0"]
 
 rotation = -1.57079
 build_mode = 0
-polygon = PoolVector2Array( -17.1793, 13.1874, -14.7068, 13.1874, -10.1029, 1.76285, -10.3587, 7.64562, -2.0034, 7.56036, -1.32936, 9.95712, 2.14179, 9.95709, 2.85628, 7.64562, 7.28967, 7.04882, 11.7231, 7.56036, 14.9629, 13.4431, 18.0321, 13.3579, 10.7852, -1.22117, 9.42111, -1.22117, 9.33586, -5.31353, 6.18132, -8.72384, 6.01082, -12.9867, -7.6304, -13.2425, -5.41371, -10.429, -5.15794, -6.50714, -7.37463, -7.786, -8.31247, -4.80199, -5.41371, -3.18209, -5.41371, -0.368591, -11.467, -0.368591 )
+polygon = PoolVector2Array( 10.7852, -1.22117, 9.33586, -5.31353, 6.18132, -8.72384, 6.01082, -12.9867, -7.6304, -13.2425, -5.41371, -10.429, -5.15794, -6.50714, -7.37463, -7.786, -8.31247, -4.80199, -5.41371, -3.18209, -5.60654, -0.980197 )
+_sections_unfolded = [ "Transform" ]
 
-[node name="eagle" type="Sprite" parent="." index="1"]
+[node name="MainBodySprite" type="Sprite" parent="." index="1"]
 
+position = Vector2( -6.49268, -0.36018 )
+rotation = -1.57079
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 2, 0, 31, 15 )
+_sections_unfolded = [ "Region" ]
+
+[node name="LandingGear" type="CollisionPolygon2D" parent="." index="2"]
+
+rotation = -1.57079
+build_mode = 0
+polygon = PoolVector2Array( -17.1793, 13.1874, -14.7068, 13.1874, -11.4923, 6.83812, -8.21777, 6.67354, -8.21781, 0.370482, 5.91908, 0.730569, 5.91911, 6.7635, 11.1417, 6.76347, 14.9629, 13.4431, 18.0321, 13.3579, 10.9615, -0.349991, -8.12777, -0.620005, -11.467, -0.368591 )
+
+[node name="LandingGearSprite" type="Sprite" parent="." index="3"]
+
+position = Vector2( 6.58346, -0.606487 )
+rotation = -1.57079
+texture = ExtResource( 2 )
+offset = Vector2( 0.0238289, 0.980224 )
+region_enabled = true
+region_rect = Rect2( 2, 15, 31, 12 )
+_sections_unfolded = [ "Region" ]
+
+[node name="Engine" type="CollisionPolygon2D" parent="." index="4"]
+
+rotation = -1.57079
+build_mode = 0
+polygon = PoolVector2Array( -7.22728, 7.39389, -1.9147, 7.39386, -2.00472, 10.7255, 1.50699, 10.7255, 1.49373, 7.18943, 4.29832, 7.12368, 4.02815, -0.530039, -7.22733, -0.620011 )
+
+[node name="EngineSprite" type="Sprite" parent="." index="5"]
+
+visible = false
 rotation = -1.57079
 texture = ExtResource( 2 )
 
-[node name="EngineParticles" type="Particles2D" parent="." index="2"]
+[node name="EngineParticles" type="Particles2D" parent="." index="6"]
 
 position = Vector2( 12, 1 )
 emitting = false
@@ -135,7 +169,7 @@ h_frames = 8
 v_frames = 1
 _sections_unfolded = [ "Drawing", "Process Material", "Textures", "Time" ]
 
-[node name="RCThrusterParticles_Left" type="Particles2D" parent="." index="3"]
+[node name="RCThrusterParticles_Left" type="Particles2D" parent="." index="7"]
 
 position = Vector2( -9.00001, -9 )
 rotation = 4.97418
@@ -159,7 +193,7 @@ h_frames = 8
 v_frames = 1
 _sections_unfolded = [ "Drawing", "Process Material", "Textures", "Time" ]
 
-[node name="RCThrusterParticles_Right" type="Particles2D" parent="." index="4"]
+[node name="RCThrusterParticles_Right" type="Particles2D" parent="." index="8"]
 
 position = Vector2( -9.00002, 8.99998 )
 rotation = 1.309
@@ -183,7 +217,7 @@ h_frames = 8
 v_frames = 1
 _sections_unfolded = [ "Drawing", "Process Material", "Textures", "Time" ]
 
-[node name="RayCast2D" type="RayCast2D" parent="." index="5"]
+[node name="RayCast2D" type="RayCast2D" parent="." index="9"]
 
 enabled = true
 exclude_parent = true
@@ -191,7 +225,7 @@ cast_to = Vector2( 0, 1000 )
 collision_mask = 1
 _sections_unfolded = [ "Transform" ]
 
-[node name="Ray" type="Sprite" parent="." index="6"]
+[node name="Ray" type="Sprite" parent="." index="10"]
 
 visible = false
 position = Vector2( 1.41918, 0.734558 )

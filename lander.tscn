@@ -71,7 +71,7 @@ anim_offset_random = 0.0
 anim_loop = false
 _sections_unfolded = [ "Color", "Emission Shape", "Initial Velocity", "Resource", "Scale", "Spread" ]
 
-[node name="MoonLander" type="RigidBody2D" index="0"]
+[node name="MoonLander" type="RigidBody2D"]
 
 input_pickable = false
 collision_layer = 1
@@ -94,6 +94,7 @@ angular_damp = -1.0
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform", "collision" ]
 main_engine_thrust = 80
+active = false
 rc_thrust = 100
 fuel_capacity = 200.0
 rc_fuel_capacity = 50.0

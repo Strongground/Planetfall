@@ -18,24 +18,26 @@ var goods_origin_loaded = false
 onready var _game = get_tree().get_current_scene()
 
 func _ready():
+	# generate title if empty
+	if self.title == null or self.title == "" or self.title == "Null":
+		self.title = self._generate_title()
 	# if id is given, set it as name of the node. otherwise generate id and use that.
 	if self.id == "":
-		self._generate_id()
+		self.id = self._generate_id()
 	self.set_name(self.id)
 	# auto generate description of contract
 	if typeof(_game.get_landing_target(origin_id)) != TYPE_NIL && \
 		typeof(_game.get_landing_target(target_id)) != TYPE_NIL:
 		if description.length() == 0:
-			description = "Deliver "+str(goods_amount)+" units of "+str(goods)+" from "+str(_game.get_landing_target(origin_id).get("description"))+" to "+str(_game.get_landing_target(target_id).get("description"))+". Payout is "+str(pay)+"‡"	
+			description = "Deliver "+str(goods_amount)+" units of "+str(goods['display_name'])+" from "+str(_game.get_landing_target(origin_id).get("description"))+" to "+str(_game.get_landing_target(target_id).get("description"))+". Payout is "+str(pay)+"‡"	
 	else:
 		print("ERROR: One or both of the landing targets for contract "+ self.id +" are not existing!")
 
+func _generate_title():
+	return "Delivery: " + str(goods_amount)+" "+str(goods['display_name'])
+
 func _generate_id():
-	self.id = str(title) + str(OS.get_system_time_secs())
-	
-#func _landed_at_landing_target(landing_target_id):
-#	var _landing_target = _game.get_landing_target(landing_target_id)
-#	return _landing_target.target_area.overlaps_body(_game.lander) and _game.lander.alive and _game.lander.landed
+	return str(self.title) + str(OS.get_system_time_secs())
 	
 func _process(delta):
 	if self.accepted and not self.fulfilled:

@@ -7,10 +7,10 @@ path="res://.import/cursor_pointerFlat_shadow.png-06868047be8462f38c7bd287a90529
 [deps]
 
 source_file="res://space_theme_ui/cursor_pointerFlat_shadow.png"
-source_md5="9a68292c43c7097411ea304738182556"
+source_md5="3c8a931f4ccdbada00944fd0f40dd90b"
 
 dest_files=[ "res://.import/cursor_pointerFlat_shadow.png-06868047be8462f38c7bd287a90529f2.stex" ]
-dest_md5="90c1991a6cf27b9e54a2db270b58b18b"
+dest_md5="d745fc4728ec16051944ebcd19da860c"
 
 [params]
 

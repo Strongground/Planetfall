@@ -35,5 +35,6 @@ func _process(delta):
 		print("Fuel prices: Main: " + str(_main_fuel_price) + " RC: " + str(_rc_fuel_price))
 		if _lander.pay(_main_fuel_price + _rc_fuel_price) == true:
 			_lander.refill_fuel()
+			_game.create_floater("Fuel refilled \nfor "+str(_main_fuel_price + _rc_fuel_price)+"Cr")
 	if not is_landed() == true:
 		trigger_counter = 0

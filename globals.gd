@@ -3,13 +3,13 @@ extends Node
 const goods = {
 	'food': {
 		'display_name': 'Food Supplies',
-		'amount': 0,
+		'price': 75,
 		'weight': 1,
 		'icon': preload("res://icons/goods/food_crate.png")
 	},
 	'spare_parts': {
 		'display_name': 'Spare Parts',
-		'amount': 0,
+		'price': 150,
 		'weight': 3,
 		'icon': preload("res://icons/goods/generic_crate.png")
 	}

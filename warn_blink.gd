@@ -22,3 +22,6 @@ func blink(color=Color(1,0,0,1), speed=1.0):
 	_tween.interpolate_property(_warning_light, "modulate", _gcurrent, _gcolor, _gspeed, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	_tween.set_repeat(true)
 	_tween.start()
+	
+func stop_blink():
+	_tween.stop_all()

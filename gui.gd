@@ -14,6 +14,7 @@ onready var _inventory_container = get_node("Control/Inventory Panel/MarginConta
 onready var _inventory_slot = preload("res://inventory_slot.tscn")
 onready var _credits_display = get_node("Control/Credits Panel/MarginContainer/VBoxContainer/NinePatchRect/Credits_Display")
 onready var _contracts_container = get_node("Control/Contracts Panel/MarginContainer/Contracts Container")
+onready var _contracts_panel = get_node("Control/Contracts Panel")
 onready var _empty_label = get_node("Label")
 onready var overlay = get_node("Control/Overlay")
 
@@ -32,9 +33,13 @@ func _process(delta):
 	if _lander.fuel / _lander.fuel_capacity < main_fuel_warning_treshold:
 		if not _main_fuel_low_warning.is_blinking():
 			_main_fuel_low_warning.blink()
+	else:
+			_main_fuel_low_warning.stop_blink()
 	if _lander.rc_fuel / _lander.rc_fuel_capacity < rc_fuel_warning_treshold:
 		if not _rc_fuel_low_warning.is_blinking():
 			_rc_fuel_low_warning.blink()
+	else:
+			_rc_fuel_low_warning.stop_blink()
 	_credits_display.set_text(str(_lander.credits_balance))
 			
 # Create inventory slots according to craft capacity
@@ -104,4 +109,6 @@ func add_contract(contract_node):
 	var _new_contract_label = _empty_label.duplicate()
 	_new_contract_label.set_text(contract_node.get("title"))
 	_contracts_container.add_child(_new_contract_label)
-	_new_contract_label.set_autowrap(true)
+#	_new_contract_label.set_autowrap(true)
+	_new_contract_label.set_visible(true)
+	

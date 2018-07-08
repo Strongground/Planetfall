@@ -9,7 +9,7 @@
 [ext_resource path="res://fonts/font_kenvector.tres" type="DynamicFont" id=7]
 [ext_resource path="res://space_theme_ui/metalPanel_red.png" type="Texture" id=8]
 
-[node name="Menus" type="Node2D"]
+[node name="Menus" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Rect", "Size Flags", "Transform" ]

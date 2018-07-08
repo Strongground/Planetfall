@@ -6,7 +6,11 @@ path="res://.import/eagle.png-6c690ac6775d78c1bf8ce017525c043e.stex"
 
 [deps]
 
-source_md5="7a30e7267780d0d912b39a20972bae58"
+source_file="res://eagle.png"
+source_md5="cbb22a7d13b6ed1603f2425ff5a705b3"
+
+dest_files=[ "res://.import/eagle.png-6c690ac6775d78c1bf8ce017525c043e.stex" ]
+dest_md5="781a6703cdcf022a35f74a25980be503"
 
 [params]
 

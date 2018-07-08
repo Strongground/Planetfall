@@ -153,8 +153,9 @@ func _recalculate_inventory_weight():
 	var item_weight = 0.0
 	for item in inventory:
 		item_weight += globals.get_goods_weight(item) * inventory[item]['amount']
-	inventory_weight = (item_weight) * 100
-#	print("Inventory weight: " + str(inventory_weight))
+	inventory_weight = (item_weight)
+	print("Inventory weight: " + str(inventory_weight))
+	print("Craft weight: " + str(self.weight))
 		
 func add_to_inventory(item, amount):
 	if item in globals.goods:
@@ -214,7 +215,7 @@ func accept_contract(contract_id):
 	self.contracts.push_back(_contract)
 	_contract.accepted = true
 	_game.gui.add_contract(_contract)
-	_game.create_floater("Contract accepted!")
+	_game.create_floater("Contract \n'"+ _contract.get('title') +"'\n accepted!")
 
 # A given amount is added to the players balance.
 func add_credits(sum):

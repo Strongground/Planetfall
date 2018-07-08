@@ -122,11 +122,11 @@ _sections_unfolded = [ "Smoothing" ]
 [node name="MoonLander" parent="." index="3" instance=ExtResource( 6 )]
 
 position = Vector2( -358.199, 87.1243 )
-active = false
+active = true
 rc_thrust = 300
 fuel_capacity = 3000.0
 rc_fuel_capacity = 1000.0
-damage_treshhold = 1200.0
+damage_treshhold = 12.0
 
 [node name="InputManager" type="Node2D" parent="." index="4"]
 
@@ -148,7 +148,21 @@ position = Vector2( 237.019, 44.7799 )
 id = "grocery"
 description = "a local grocery store"
 
-[node name="FuelStation" parent="." index="7" groups=[
+[node name="LandingTarget3" parent="." index="7" groups=[
+"landing_targets",
+] instance=ExtResource( 8 )]
+
+position = Vector2( 749.983, 41.5529 )
+description = "some housing"
+
+[node name="LandingTarget4" parent="." index="8" groups=[
+"landing_targets",
+] instance=ExtResource( 8 )]
+
+position = Vector2( 641.303, 100.227 )
+description = "a research station"
+
+[node name="FuelStation" parent="." index="9" groups=[
 "landing_targets",
 ] instance=ExtResource( 8 )]
 
@@ -156,54 +170,10 @@ position = Vector2( -572.182, 65.1272 )
 rotation = 0.261799
 _is_pump = true
 
-[node name="Marker_Debug" type="Sprite" parent="." index="8"]
+[node name="Marker_Debug" type="Sprite" parent="." index="10"]
 
 position = Vector2( -292.892, -925.706 )
 texture = ExtResource( 9 )
-
-[node name="HOT_Debug" type="Label" parent="." index="9"]
-
-visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = -324.0
-margin_top = -96.0
-margin_right = -133.0
-margin_bottom = -82.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-text = "Terrain Collision Coordinates: "
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="HOT_Debug2" type="Label" parent="." index="10"]
-
-visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = -324.0
-margin_top = -76.0
-margin_right = -133.0
-margin_bottom = -62.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-text = "Terrain Collision Coordinates: "
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
 [node name="Contract" parent="." index="11" instance=ExtResource( 10 )]
 

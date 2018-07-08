@@ -130,6 +130,7 @@ func _integrate_forces(state):
 
 func _on_MoonLander_body_entered(body):
 	if self.active:
+		print(str(body))
 	#	print("Collision with force: " + str(get_linear_velocity()))
 		# on collision damage
 		if abs(get_linear_velocity().x) >= damage_treshhold or abs(get_linear_velocity().y) >= damage_treshhold:

@@ -3,7 +3,7 @@
 [ext_resource path="res://fonts/font_overlay.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Overlay.gd" type="Script" id=2]
 
-[node name="Overlay" type="RichTextLabel"]
+[node name="Overlay" type="RichTextLabel" index="0"]
 
 modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.0

@@ -1,7 +1,6 @@
 extends RichTextLabel
 
 onready var _tween = get_node("Tween")
-onready var _timer = get_node("Timer")
 var _start_modulation = null
 var _target_modulation = null
 var _speed = null
